@@ -1,0 +1,226 @@
+{
+  "spor":{
+  "a1":[
+    {"en":"ball","tr":"top"},
+    {"en":"run","tr":"koşmak"},
+    {"en":"jump","tr":"zıplamak"},
+    {"en":"win","tr":"kazanmak"},
+    {"en":"lose","tr":"kaybetmek"},
+    {"en":"play","tr":"oynamak"},
+    {"en":"team","tr":"takım"},
+    {"en":"game","tr":"oyun"},
+    {"en":"fast","tr":"hızlı"},
+    {"en":"strong","tr":"güçlü"}
+  ],
+  "a2":[
+    {"en":"training","tr":"antrenman"},
+    {"en":"coach","tr":"antrenör"},
+    {"en":"player","tr":"oyuncu"},
+    {"en":"score","tr":"skor"},
+    {"en":"goalkeeper","tr":"kaleci"},
+    {"en":"win","tr":"kazanmak"},
+    {"en":"lose","tr":"kaybetmek"},
+    {"en":"teamwork","tr":"takım çalışması"},
+    {"en":"practice","tr":"pratik yapmak"},
+    {"en":"compete","tr":"rekabet etmek"}
+  ],
+  "b1":[
+    {"en":"competition","tr":"rekabet"},
+    {"en":"performance","tr":"performans"},
+    {"en":"fitness","tr":"kondisyon"},
+    {"en":"strength","tr":"güç"},
+    {"en":"skill","tr":"beceri"},
+    {"en":"strategy","tr":"strateji"},
+    {"en":"result","tr":"sonuç"},
+    {"en":"effort","tr":"çaba"},
+    {"en":"improve","tr":"geliştirmek"},
+    {"en":"focus","tr":"odaklanmak"}
+  ],
+  "b2":[
+    {"en":"endurance","tr":"dayanıklılık"},
+    {"en":"achievement","tr":"başarı"},
+    {"en":"analysis","tr":"analiz"},
+    {"en":"tactic","tr":"taktik"},
+    {"en":"coordination","tr":"koordinasyon"},
+    {"en":"discipline","tr":"disiplin"},
+    {"en":"challenge","tr":"zorluk"},
+    {"en":"training plan","tr":"antrenman planı"},
+    {"en":"progress","tr":"ilerleme"},
+    {"en":"consistency","tr":"istikrar"}
+  ],
+  "c1":[
+    {"en":"dedication","tr":"adanmışlık"},
+    {"en":"resilience","tr":"dayanıklılık/direnç"},
+    {"en":"optimization","tr":"en iyi hale getirme"},
+    {"en":"evaluation","tr":"değerlendirme"},
+    {"en":"adaptation","tr":"uyum sağlama"},
+    {"en":"intensity","tr":"yoğunluk"},
+    {"en":"refinement","tr":"geliştirme/incelik"},
+    {"en":"expertise","tr":"uzmanlık"},
+    {"en":"sustain","tr":"sürdürmek"},
+    {"en":"enhance","tr":"artırmak"}
+  ],
+  "c2":[
+    {"en":"meticulous","tr":"titiz"},
+    {"en":"cohesion","tr":"uyum/bütünlük"},
+    {"en":"precision","tr":"hassasiyet"},
+    {"en":"dominance","tr":"üstünlük"},
+    {"en":"versatility","tr":"çok yönlülük"},
+    {"en":"perseverance","tr":"azim"},
+    {"en":"intricate","tr":"karmaşık"},
+    {"en":"refinement","tr":"incelik"},
+    {"en":"execution","tr":"uygulama"},
+    {"en":"consistency","tr":"tutarlılık"}
+  ]
+},
+  "arabalar":{
+  "a1":[
+    {"en":"car","tr":"araba"},
+    {"en":"road","tr":"yol"},
+    {"en":"wheel","tr":"tekerlek"},
+    {"en":"door","tr":"kapı"},
+    {"en":"seat","tr":"koltuk"},
+    {"en":"drive","tr":"sürmek"},
+    {"en":"stop","tr":"durmak"},
+    {"en":"go","tr":"gitmek"},
+    {"en":"fast","tr":"hızlı"},
+    {"en":"slow","tr":"yavaş"}
+  ],
+  "a2":[
+    {"en":"driver","tr":"sürücü"},
+    {"en":"engine","tr":"motor"},
+    {"en":"brake","tr":"fren"},
+    {"en":"mirror","tr":"ayna"},
+    {"en":"window","tr":"pencere"},
+    {"en":"turn","tr":"dönmek"},
+    {"en":"park","tr":"park etmek"},
+    {"en":"fuel","tr":"yakıt"},
+    {"en":"repair","tr":"tamir etmek"},
+    {"en":"license","tr":"ehliyet"}
+  ],
+  "b1":[
+    {"en":"vehicle","tr":"taşıt"},
+    {"en":"traffic","tr":"trafik"},
+    {"en":"journey","tr":"yolculuk"},
+    {"en":"destination","tr":"varış noktası"},
+    {"en":"accident","tr":"kaza"},
+    {"en":"insurance","tr":"sigorta"},
+    {"en":"service","tr":"bakım"},
+    {"en":"condition","tr":"durum"},
+    {"en":"speed","tr":"hız"},
+    {"en":"control","tr":"kontrol"}
+  ],
+  "b2":[
+    {"en":"transmission","tr":"vites sistemi"},
+    {"en":"efficiency","tr":"verimlilik"},
+    {"en":"consumption","tr":"tüketim"},
+    {"en":"performance","tr":"performans"},
+    {"en":"maintenance","tr":"bakım"},
+    {"en":"capacity","tr":"kapasite"},
+    {"en":"feature","tr":"özellik"},
+    {"en":"design","tr":"tasarım"},
+    {"en":"safety","tr":"güvenlik"},
+    {"en":"technology","tr":"teknoloji"}
+  ],
+  "c1":[
+    {"en":"accelerate","tr":"hızlanmak"},
+    {"en":"decelerate","tr":"yavaşlamak"},
+    {"en":"stability","tr":"denge/kararlılık"},
+    {"en":"durability","tr":"dayanıklılık"},
+    {"en":"precision","tr":"hassasiyet"},
+    {"en":"evaluation","tr":"değerlendirme"},
+    {"en":"innovation","tr":"yenilik"},
+    {"en":"advanced","tr":"ileri düzey"},
+    {"en":"optimize","tr":"optimize etmek"},
+    {"en":"enhancement","tr":"iyileştirme"}
+  ],
+  "c2":[
+    {"en":"aerodynamics","tr":"hava direnci özellikleri"},
+    {"en":"propulsion","tr":"itki sistemi"},
+    {"en":"mechanism","tr":"mekanizma"},
+    {"en":"integration","tr":"entegrasyon"},
+    {"en":"configuration","tr":"yapılandırma"},
+    {"en":"sophistication","tr":"gelişmişlik"},
+    {"en":"specification","tr":"teknik özellik"},
+    {"en":"refinement","tr":"incelik"},
+    {"en":"complexity","tr":"karmaşıklık"},
+    {"en":"adaptation","tr":"uyum sağlama"}
+  ]
+},
+"kahveler ve içecekler":{
+  "a1":[
+    {"en":"water","tr":"su"},
+    {"en":"milk","tr":"süt"},
+    {"en":"drink","tr":"içmek"},
+    {"en":"cup","tr":"fincan"},
+    {"en":"hot","tr":"sıcak"},
+    {"en":"cold","tr":"soğuk"},
+    {"en":"sugar","tr":"şeker"},
+    {"en":"glass","tr":"bardak"},
+    {"en":"make","tr":"yapmak"},
+    {"en":"buy","tr":"satın almak"}
+  ],
+  "a2":[
+    {"en":"order","tr":"sipariş vermek"},
+    {"en":"waiter","tr":"garson"},
+    {"en":"price","tr":"fiyat"},
+    {"en":"table","tr":"masa"},
+    {"en":"bill","tr":"hesap"},
+    {"en":"sweet","tr":"tatlı"},
+    {"en":"bitter","tr":"acı"},
+    {"en":"ice","tr":"buz"},
+    {"en":"choose","tr":"seçmek"},
+    {"en":"bring","tr":"getirmek"}
+  ],
+  "b1":[
+    {"en":"beverage","tr":"içecek"},
+    {"en":"ingredient","tr":"malzeme"},
+    {"en":"recipe","tr":"tarif"},
+    {"en":"energy","tr":"enerji"},
+    {"en":"refreshing","tr":"ferahlatıcı"},
+    {"en":"prepare","tr":"hazırlamak"},
+    {"en":"serve","tr":"servis etmek"},
+    {"en":"taste","tr":"tat"},
+    {"en":"customer","tr":"müşteri"},
+    {"en":"habit","tr":"alışkanlık"}
+  ],
+  "b2":[
+    {"en":"brewing","tr":"demleme"},
+    {"en":"intensity","tr":"yoğunluk"},
+    {"en":"preference","tr":"tercih"},
+    {"en":"variety","tr":"çeşit"},
+    {"en":"quality","tr":"kalite"},
+    {"en":"process","tr":"süreç"},
+    {"en":"consumption","tr":"tüketim"},
+    {"en":"source","tr":"kaynak"},
+    {"en":"supply","tr":"tedarik"},
+    {"en":"demand","tr":"talep"}
+  ],
+  "c1":[
+    {"en":"distinctive","tr":"ayırt edici"},
+    {"en":"extraction","tr":"özütleme"},
+    {"en":"complexity","tr":"karmaşıklık"},
+    {"en":"balance","tr":"denge"},
+    {"en":"refined","tr":"rafine"},
+    {"en":"consistency","tr":"tutarlılık"},
+    {"en":"expertise","tr":"uzmanlık"},
+    {"en":"evaluate","tr":"değerlendirmek"},
+    {"en":"enhance","tr":"artırmak"},
+    {"en":"sustain","tr":"sürdürmek"}
+  ],
+  "c2":[
+    {"en":"nuance","tr":"ince fark"},
+    {"en":"palate","tr":"damak tadı"},
+    {"en":"subtle","tr":"ince/hafif"},
+    {"en":"refinement","tr":"incelik"},
+    {"en":"perception","tr":"algı"},
+    {"en":"discern","tr":"ayırt etmek"},
+    {"en":"sophisticated","tr":"sofistike"},
+    {"en":"composition","tr":"bileşim"},
+    {"en":"profile","tr":"profil"},
+    {"en":"acquire","tr":"edinmek"}
+  ]
+}
+
+
+}

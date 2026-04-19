@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelime Master</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f4f7f6;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #game-area,
+    #level-selection {
+      display: none;
+    }
+
+    .cat-btn {
+      padding: 15px 25px;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4A90E2;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .cat-btn:hover {
+      background-color: #357ABD;
+    }
+
+    #category-buttons,
+    #level-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #answers {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #answers button {
+      padding: 12px;
+      cursor: pointer;
+      width: 45%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #fff;
+      font-size: 16px;
+    }
+
+    #answers button:hover {
+      background: #f0f0f0;
+    }
+
+    #next-btn {
+      background-color: #2ECC71;
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    #user-input {
+      padding: 12px;
+      font-size: 18px;
+      width: 70%;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    #status-bar {
+      background: #eef2f3;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .correct {
+      color: #27ae60;
+    }
+
+    .wrong {
+      color: #e74c3c;
+    }
+
+    @media (max-width: 600px) {
+      #answers button,
+      .cat-btn,
+      #input-area button,
+      #user-input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="category-selection">
+      <h1>İlgi Alanını Seç</h1>
+      <div id="category-buttons"></div>
+    </div>
+
+    <div id="level-selection">
+      <h1>İngilizce Seviyen?</h1>
+      <div id="level-buttons"></div>
+    </div>
+
+    <div id="game-area">
+      <div id="status-bar">
+        <span id="stat-cat">-</span> |
+        <span id="stat-lvl">-</span> |
+        Tamamlanan: <span id="stat-count">0</span>
+      </div>
+
+      <div id="level-step-info" style="color: #3498db; font-weight: bold; margin-bottom: 10px;">
+        Aşama: 1
+      </div>
+
+      <h2 id="question">Soru</h2>
+
+      <div id="answers"></div>
+
+      <div id="input-area" style="display:none;">
+        <input type="text" id="user-input" placeholder="Cevabı buraya yazın..." autocomplete="off">
+        <button class="cat-btn" style="padding: 10px 20px;" onclick="checkInputAnswer()">Gönder</button>
+      </div>
+
+      <div id="result-text" style="font-size: 20px; margin-top: 20px; font-weight: bold; min-height: 1.5em;"></div>
+      <button id="next-btn" style="display:none;">İlerle ➔</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
