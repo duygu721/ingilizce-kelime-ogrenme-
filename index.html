@@ -5,12 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kelime Master</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: "Segoe UI", sans-serif;
       text-align: center;
       padding: 20px;
       background-color: #f4f7f6;
       margin: 0;
+      color: #1f2933;
     }
 
     .container {
@@ -36,11 +41,20 @@
       border-radius: 8px;
       background-color: #4A90E2;
       color: white;
-      transition: 0.3s;
+      transition: background-color 0.2s, opacity 0.2s, transform 0.2s;
     }
 
-    .cat-btn:hover {
+    .cat-btn:hover:not(:disabled) {
       background-color: #357ABD;
+      transform: translateY(-1px);
+    }
+
+    .cat-btn:disabled,
+    #answers button:disabled,
+    #next-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.65;
+      transform: none;
     }
 
     #category-buttons,
@@ -62,15 +76,26 @@
     #answers button {
       padding: 12px;
       cursor: pointer;
-      width: 45%;
+      width: calc(50% - 10px);
+      min-height: 48px;
       border: 1px solid #ddd;
       border-radius: 5px;
       background: #fff;
+      color: #1f2933;
       font-size: 16px;
+      overflow-wrap: anywhere;
     }
 
-    #answers button:hover {
+    #answers button:hover:not(:disabled) {
       background: #f0f0f0;
+    }
+
+    #input-area {
+      margin-top: 18px;
+    }
+
+    #input-area button {
+      vertical-align: middle;
     }
 
     #next-btn {
@@ -84,13 +109,24 @@
       font-size: 16px;
     }
 
+    #next-btn:hover {
+      background-color: #27ae60;
+    }
+
     #user-input {
       padding: 12px;
       font-size: 18px;
       width: 70%;
+      max-width: 430px;
       border: 2px solid #ddd;
       border-radius: 5px;
       outline: none;
+      vertical-align: middle;
+    }
+
+    #user-input:focus {
+      border-color: #4A90E2;
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
     }
 
     #status-bar {
@@ -101,6 +137,33 @@
       font-size: 14px;
     }
 
+    #level-step-info {
+      color: #3498db;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    #question {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    #cant-listen-btn {
+      background-color: #6c757d;
+      display: inline-block;
+      max-width: 320px;
+      width: auto;
+    }
+
+    #cant-listen-btn:hover:not(:disabled) {
+      background-color: #5a6268;
+    }
+
     .correct {
       color: #27ae60;
     }
@@ -109,13 +172,36 @@
       color: #e74c3c;
     }
 
+    #result-text {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+      min-height: 1.5em;
+      overflow-wrap: anywhere;
+    }
+
     @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .container {
+        padding: 22px 16px;
+      }
+
       #answers button,
       .cat-btn,
       #input-area button,
-      #user-input {
+      #user-input,
+      #cant-listen-btn {
         width: 100%;
-        box-sizing: border-box;
+        max-width: none;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      #input-area button {
+        margin-top: 10px;
       }
     }
   </style>
@@ -139,9 +225,7 @@
         Tamamlanan: <span id="stat-count">0</span>
       </div>
 
-      <div id="level-step-info" style="color: #3498db; font-weight: bold; margin-bottom: 10px;">
-        Aşama: 1
-      </div>
+      <div id="level-step-info">Aşama: 1</div>
 
       <h2 id="question">Soru</h2>
 
@@ -152,7 +236,7 @@
         <button class="cat-btn" style="padding: 10px 20px;" onclick="checkInputAnswer()">Gönder</button>
       </div>
 
-      <div id="result-text" style="font-size: 20px; margin-top: 20px; font-weight: bold; min-height: 1.5em;"></div>
+      <div id="result-text"></div>
       <button id="next-btn" style="display:none;">İlerle ➔</button>
     </div>
   </div>
