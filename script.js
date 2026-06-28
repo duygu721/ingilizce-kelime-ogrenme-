@@ -16,6 +16,7 @@ let reviewTargetLevel = "";
 let reviewAnsweredCount = 0;
 
 let forcedWord = null;
+let answerLocked = false;
 
 const nextButton = document.getElementById("next-btn");
 const userInput = document.getElementById("user-input");
@@ -265,14 +266,14 @@ function askQuestion() {
     if (lastWordsHistory.length > 2) lastWordsHistory.shift();
 
     currentWord = selectedWord;
+    answerLocked = false;
 
     const stepTexts = [
         "",
         "TR -> EN (Seçim)",
         "EN -> TR (Seçim)",
         "TR -> EN (Yazım)",
-        "Dinle ve Yaz",
-        "EN -> TR (Yazım)"
+        "Dinle ve Yaz"
     ];
 
     const mode = getCurrentQuestionMode();
@@ -293,7 +294,7 @@ function askQuestion() {
 
         if (mode === 4) {
             document.getElementById("question").innerHTML = `
-                <div style="display: flex; justify-content: center; gap: 20px;">
+                <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
                     <button id="speak-normal-btn" style="font-size: 40px; border: none; background: none; cursor: pointer;">
                         🔊 <span style="font-size: 14px; display: block;">Normal</span>
                     </button>
@@ -301,10 +302,14 @@ function askQuestion() {
                         🐢 <span style="font-size: 14px; display: block;">Yavaş</span>
                     </button>
                 </div>
+                <button id="cant-listen-btn" class="cat-btn" style="margin-top: 14px;">
+                    Şu anda dinleyemiyorum
+                </button>
             `;
 
             document.getElementById("speak-normal-btn").onclick = () => speak(currentWord.en);
             document.getElementById("speak-slow-btn").onclick = () => speak(currentWord.en, true);
+            document.getElementById("cant-listen-btn").onclick = () => checkResult(true, currentWord.en);
 
             speak(currentWord.en);
         } else {
@@ -403,6 +408,9 @@ function endReviewAndReturnToLevel(level) {
 }
 
 function checkResult(isCorrect, correctVal) {
+    if (answerLocked) return;
+    answerLocked = true;
+
     const resDiv = document.getElementById("result-text");
 
     if (isCorrect) {
@@ -418,7 +426,7 @@ function checkResult(isCorrect, correctVal) {
         } else {
             currentWord.step++;
 
-            if (currentWord.step > 5) {
+            if (currentWord.step > 4) {
                 markWordAsLearned(currentCategory, currentLevelName, currentWord);
                 pool = pool.filter(w => w !== currentWord);
                 learnedCount++;
@@ -428,6 +436,10 @@ function checkResult(isCorrect, correctVal) {
     } else {
         currentWord.wrongCount++;
         resDiv.className = "wrong";
+        if (lastWordsHistory) {
+            lastWordsHistory.push(currentWord.en);
+            if (lastWordsHistory.length > 3) lastWordsHistory.shift();
+        }
 
         if (currentWord.wrongCount >= 2) {
             if (reviewMode) {
@@ -461,6 +473,9 @@ function checkResult(isCorrect, correctVal) {
         b.disabled = true;
     });
 
+    const cantListenButton = document.getElementById("cant-listen-btn");
+    if (cantListenButton) cantListenButton.disabled = true;
+
     nextButton.style.display = "inline-block";
 }
 
@@ -488,7 +503,7 @@ function startReviewTest(levels, nextLevel) {
             .map(w => ({
                 ...w,
                 sourceLevel: level,
-                questionMode: Math.floor(Math.random() * 5) + 1,
+                questionMode: Math.floor(Math.random() * 4) + 1,
                 wrongCount: 0
             }));
 
