@@ -9,22 +9,56 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --green: #58cc02;
+      --green-dark: #46a302;
+      --green-shadow: #3f9700;
+      --blue: #1cb0f6;
+      --yellow: #ffc800;
+      --red: #ff4b4b;
+      --ink: #243042;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --soft: #f7fce9;
+    }
+
     body {
-      font-family: "Segoe UI", sans-serif;
-      text-align: center;
-      padding: 20px;
-      background-color: #f4f7f6;
+      min-height: 100vh;
       margin: 0;
-      color: #1f2933;
+      padding: 18px;
+      font-family: "Segoe UI", Arial, sans-serif;
+      text-align: center;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 14% 16%, rgba(255, 200, 0, 0.22), transparent 28%),
+        radial-gradient(circle at 86% 12%, rgba(28, 176, 246, 0.18), transparent 26%),
+        linear-gradient(180deg, #f2ffe7 0%, #f8fff2 48%, #eef8ff 100%);
     }
 
     .container {
-      max-width: 700px;
+      width: min(760px, 100%);
+      min-height: calc(100vh - 36px);
       margin: 0 auto;
-      background: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      border: 2px solid #d7efc2;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 18px 50px rgba(36, 48, 66, 0.12);
+    }
+
+    h1 {
+      margin: 8px 0 6px;
+      font-size: clamp(30px, 6vw, 48px);
+      font-weight: 900;
+      letter-spacing: 0;
+      color: var(--green-dark);
+    }
+
+    h2 {
+      margin: 18px auto;
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: 0;
     }
 
     #game-area,
@@ -32,164 +66,326 @@
       display: none;
     }
 
-    .cat-btn {
-      padding: 15px 25px;
-      margin: 10px;
-      cursor: pointer;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background-color: #4A90E2;
-      color: white;
-      transition: background-color 0.2s, opacity 0.2s, transform 0.2s;
+    #category-buttons,
+    #level-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
     }
 
-    .cat-btn:hover:not(:disabled) {
-      background-color: #357ABD;
-      transform: translateY(-1px);
+    .cat-btn,
+    #next-btn,
+    #answers button {
+      border-radius: 16px;
+      font-weight: 900;
+      letter-spacing: 0;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease, opacity 0.12s ease;
+    }
+
+    .cat-btn {
+      min-height: 56px;
+      padding: 14px 20px;
+      margin: 0;
+      border: none;
+      border-bottom: 5px solid var(--green-shadow);
+      cursor: pointer;
+      font-size: 18px;
+      color: white;
+      background: var(--green);
+      box-shadow: 0 8px 18px rgba(88, 204, 2, 0.22);
+    }
+
+    .cat-btn:hover:not(:disabled),
+    #next-btn:hover:not(:disabled),
+    #answers button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+
+    .cat-btn:active:not(:disabled),
+    #next-btn:active:not(:disabled),
+    #answers button:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
     }
 
     .cat-btn:disabled,
     #answers button:disabled,
     #next-btn:disabled {
       cursor: not-allowed;
-      opacity: 0.65;
+      opacity: 0.62;
       transform: none;
     }
 
-    #category-buttons,
-    #level-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    #answers {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    #answers button {
-      padding: 12px;
-      cursor: pointer;
-      width: calc(50% - 10px);
-      min-height: 48px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background: #fff;
-      color: #1f2933;
-      font-size: 16px;
-      overflow-wrap: anywhere;
-    }
-
-    #answers button:hover:not(:disabled) {
-      background: #f0f0f0;
-    }
-
-    #input-area {
-      margin-top: 18px;
-    }
-
-    #input-area button {
-      vertical-align: middle;
-    }
-
-    #next-btn {
-      background-color: #2ECC71;
-      color: white;
-      padding: 12px 30px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 20px;
-      font-size: 16px;
-    }
-
-    #next-btn:hover {
-      background-color: #27ae60;
-    }
-
-    #user-input {
-      padding: 12px;
-      font-size: 18px;
-      width: 70%;
-      max-width: 430px;
-      border: 2px solid #ddd;
-      border-radius: 5px;
-      outline: none;
-      vertical-align: middle;
-    }
-
-    #user-input:focus {
-      border-color: #4A90E2;
-      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
-    }
-
     #status-bar {
-      background: #eef2f3;
-      padding: 10px;
-      border-radius: 5px;
-      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 8px;
+      border: 2px solid #d7efc2;
+      border-radius: 18px;
+      background: var(--soft);
       font-size: 14px;
+      font-weight: 800;
+      color: var(--green-dark);
+    }
+
+    #status-bar span {
+      color: var(--ink);
     }
 
     #level-step-info {
-      color: #3498db;
-      font-weight: bold;
-      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #e8f7ff;
+      color: #0877b9;
+      font-size: 14px;
+      font-weight: 900;
     }
 
     #question {
-      min-height: 60px;
+      min-height: 96px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       overflow-wrap: anywhere;
+    }
+
+    #answers {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    #answers button {
+      min-height: 64px;
+      padding: 14px;
+      border: 2px solid var(--line);
+      border-bottom: 5px solid #cfd6df;
+      cursor: pointer;
+      background: white;
+      color: var(--ink);
+      font-size: 17px;
+      overflow-wrap: anywhere;
+    }
+
+    #answers button:hover:not(:disabled) {
+      border-color: var(--blue);
+      border-bottom-color: #1186c8;
+      background: #f4fbff;
+    }
+
+    #input-area {
+      margin-top: 22px;
+    }
+
+    #user-input {
+      width: min(430px, 100%);
+      min-height: 56px;
+      padding: 14px 16px;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      outline: none;
+      color: var(--ink);
+      background: white;
+      font-size: 18px;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+
+    #user-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(28, 176, 246, 0.16);
+    }
+
+    #input-area button {
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    #next-btn {
+      min-width: 170px;
+      min-height: 54px;
+      margin-top: 22px;
+      padding: 13px 28px;
+      border: none;
+      border-bottom: 5px solid var(--green-shadow);
+      cursor: pointer;
+      background: var(--green);
+      color: white;
+      font-size: 18px;
     }
 
     #cant-listen-btn {
-      background-color: #6c757d;
-      display: inline-block;
-      max-width: 320px;
-      width: auto;
-    }
-
-    #cant-listen-btn:hover:not(:disabled) {
-      background-color: #5a6268;
-    }
-
-    .correct {
-      color: #27ae60;
-    }
-
-    .wrong {
-      color: #e74c3c;
+      width: min(320px, 100%);
+      background: var(--blue);
+      border-bottom-color: #1186c8;
     }
 
     #result-text {
-      font-size: 20px;
-      margin-top: 20px;
-      font-weight: bold;
-      min-height: 1.5em;
+      min-height: 1.6em;
+      margin-top: 22px;
+      font-size: 22px;
+      font-weight: 900;
       overflow-wrap: anywhere;
+    }
+
+    .correct {
+      color: var(--green-dark);
+    }
+
+    .wrong {
+      color: var(--red);
+    }
+
+    #surprise-effect {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      display: none;
+      place-items: center;
+    }
+
+    #surprise-effect.show {
+      display: grid;
+    }
+
+    .surprise-card {
+      min-width: min(420px, calc(100vw - 34px));
+      padding: 24px 28px;
+      border: 4px solid white;
+      border-radius: 28px;
+      background: var(--green);
+      color: white;
+      font-size: clamp(30px, 7vw, 58px);
+      font-weight: 1000;
+      box-shadow: 0 22px 70px rgba(36, 48, 66, 0.28);
+      animation: popSurprise 0.9s ease forwards;
+    }
+
+    .wrong-pop {
+      background: var(--red);
+      animation: wrongSurprise 0.58s ease forwards;
+    }
+
+    .burst-piece {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      z-index: 9998;
+      pointer-events: none;
+      animation: burst 0.8s ease-out forwards;
+    }
+
+    .shake {
+      animation: shakeScreen 0.38s ease;
+    }
+
+    @keyframes popSurprise {
+      0% {
+        transform: scale(0.42) rotate(-5deg);
+        opacity: 0;
+      }
+
+      35% {
+        transform: scale(1.12) rotate(2deg);
+        opacity: 1;
+      }
+
+      72% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.92) rotate(0deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes wrongSurprise {
+      0% {
+        transform: scale(0.85);
+        opacity: 0;
+      }
+
+      20% {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+    }
+
+    @keyframes burst {
+      from {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+
+      to {
+        transform: translate(var(--x), var(--y)) scale(0.15);
+        opacity: 0;
+      }
+    }
+
+    @keyframes shakeScreen {
+      0%, 100% {
+        transform: translateX(0);
+      }
+
+      20% {
+        transform: translateX(-10px);
+      }
+
+      40% {
+        transform: translateX(10px);
+      }
+
+      60% {
+        transform: translateX(-6px);
+      }
+
+      80% {
+        transform: translateX(6px);
+      }
     }
 
     @media (max-width: 600px) {
       body {
-        padding: 12px;
+        padding: 10px;
       }
 
       .container {
-        padding: 22px 16px;
+        min-height: calc(100vh - 20px);
+        padding: 18px 14px;
+        border-radius: 20px;
       }
 
-      #answers button,
+      #status-bar {
+        grid-template-columns: 1fr;
+      }
+
+      #answers {
+        grid-template-columns: 1fr;
+      }
+
       .cat-btn,
       #input-area button,
       #user-input,
@@ -207,22 +403,26 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div id="category-selection">
-      <h1>İlgi Alanını Seç</h1>
+  <div id="surprise-effect"></div>
+
+  <main class="container">
+    <section id="category-selection">
+      <h1>Kelime Master</h1>
+      <p style="margin: 0; color: #6b7280; font-weight: 800;">İlgi alanını seç ve seriye başla</p>
       <div id="category-buttons"></div>
-    </div>
+    </section>
 
-    <div id="level-selection">
-      <h1>İngilizce Seviyen?</h1>
+    <section id="level-selection">
+      <h1>Seviye Seç</h1>
+      <p style="margin: 0; color: #6b7280; font-weight: 800;">Hangi seviyeden devam ediyorsun?</p>
       <div id="level-buttons"></div>
-    </div>
+    </section>
 
-    <div id="game-area">
+    <section id="game-area">
       <div id="status-bar">
-        <span id="stat-cat">-</span> |
-        <span id="stat-lvl">-</span> |
-        Tamamlanan: <span id="stat-count">0</span>
+        <div>Kategori: <span id="stat-cat">-</span></div>
+        <div>Seviye: <span id="stat-lvl">-</span></div>
+        <div>Tamamlanan: <span id="stat-count">0</span></div>
       </div>
 
       <div id="level-step-info">Aşama: 1</div>
@@ -237,9 +437,9 @@
       </div>
 
       <div id="result-text"></div>
-      <button id="next-btn" style="display:none;">İlerle ➔</button>
-    </div>
-  </div>
+      <button id="next-btn" style="display:none;">İlerle</button>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
