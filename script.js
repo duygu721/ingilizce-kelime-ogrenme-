@@ -407,6 +407,79 @@ function endReviewAndReturnToLevel(level) {
     startWithLevel(level);
 }
 
+function showCorrectSurprise() {
+    const surprise = document.getElementById("surprise-effect");
+    if (!surprise) return;
+
+    const messages = [
+        "MÜTHİŞ!",
+        "TAM İSABET!",
+        "SÜPER!",
+        "BİLDİN!",
+        "SERİ DEVAM!",
+        "HARİKA!"
+    ];
+
+    const message = messages[Math.floor(Math.random() * messages.length)];
+    surprise.innerHTML = `<div class="surprise-card">${message}</div>`;
+    surprise.classList.add("show");
+
+    const colors = ["#58cc02", "#1cb0f6", "#ffc800", "#ff4b4b", "#ce82ff", "#00cd9c"];
+
+    for (let i = 0; i < 26; i++) {
+        const piece = document.createElement("span");
+        piece.className = "burst-piece";
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 90 + Math.random() * 190;
+
+        piece.style.setProperty("--x", Math.cos(angle) * distance + "px");
+        piece.style.setProperty("--y", Math.sin(angle) * distance + "px");
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 850);
+    }
+
+    setTimeout(() => {
+        surprise.classList.remove("show");
+        surprise.innerHTML = "";
+    }, 900);
+}
+
+function showWrongSurprise() {
+    const surprise = document.getElementById("surprise-effect");
+    const container = document.querySelector(".container");
+
+    if (container) {
+        container.classList.remove("shake");
+        void container.offsetWidth;
+        container.classList.add("shake");
+        setTimeout(() => container.classList.remove("shake"), 420);
+    }
+
+    if (!surprise) return;
+
+    const messages = [
+        "TEKRAR DENE!",
+        "AZ KALDI!",
+        "BİR HAK DAHA!",
+        "ODAKLAN!"
+    ];
+
+    const message = messages[Math.floor(Math.random() * messages.length)];
+    surprise.innerHTML = `<div class="surprise-card wrong-pop">${message}</div>`;
+    surprise.classList.add("show");
+
+    setTimeout(() => {
+        surprise.classList.remove("show");
+        surprise.innerHTML = "";
+    }, 620);
+}
+
 function checkResult(isCorrect, correctVal) {
     if (answerLocked) return;
     answerLocked = true;
@@ -414,6 +487,7 @@ function checkResult(isCorrect, correctVal) {
     const resDiv = document.getElementById("result-text");
 
     if (isCorrect) {
+        showCorrectSurprise();
         resDiv.innerText = "Doğru!";
         resDiv.className = "correct";
         currentWord.wrongCount = 0;
@@ -434,6 +508,7 @@ function checkResult(isCorrect, correctVal) {
             }
         }
     } else {
+        showWrongSurprise();
         currentWord.wrongCount++;
         resDiv.className = "wrong";
         if (lastWordsHistory) {
