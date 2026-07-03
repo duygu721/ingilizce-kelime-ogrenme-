@@ -738,6 +738,752 @@
     {"en":"coherence","tr":"tutarlılık"},
     {"en":"perception","tr":"algı"}
   ]
+},
+
+  "filimler":{
+  "a1": [
+    {"en":"movie","tr":"film"},
+    {"en":"cinema","tr":"sinema"},
+    {"en":"actor","tr":"erkek oyuncu"},
+    {"en":"actress","tr":"kadın oyuncu"},
+    {"en":"TV","tr":"televizyon"},
+    {"en":"show","tr":"gösteri"},
+    {"en":"song","tr":"şarkı"},
+    {"en":"music","tr":"müzik"},
+    {"en":"ticket","tr":"bilet"},
+    {"en":"screen","tr":"ekran"}
+  ],
+  "a2": [
+    {"en":"cartoon","tr":"çizgi film"},
+    {"en":"comedy","tr":"komedi"},
+    {"en":"drama","tr":"dram"},
+    {"en":"horror","tr":"korku"},
+    {"en":"adventure","tr":"macera"},
+    {"en":"episode","tr":"bölüm"},
+    {"en":"series","tr":"dizi"},
+    {"en":"character","tr":"karakter"},
+    {"en":"scene","tr":"sahne"},
+    {"en":"director","tr":"yönetmen"}
+  ],
+  "b1": [
+    {"en":"audience","tr":"seyirci"},
+    {"en":"performance","tr":"performans"},
+    {"en":"documentary","tr":"belgesel"},
+    {"en":"soundtrack","tr":"film müziği"},
+    {"en":"festival","tr":"festival"},
+    {"en":"producer","tr":"yapımcı"},
+    {"en":"animation","tr":"animasyon"},
+    {"en":"script","tr":"senaryo"},
+    {"en":"celebrity","tr":"ünlü kişi"},
+    {"en":"trailer","tr":"tanıtım fragmanı"}
+  ],
+  "b2": [
+    {"en":"cinematography","tr":"görüntü yönetimi"},
+    {"en":"screenplay","tr":"film senaryosu"},
+    {"en":"blockbuster","tr":"çok gişe yapan film"},
+    {"en":"premiere","tr":"galası"},
+    {"en":"franchise","tr":"film serisi"},
+    {"en":"genre","tr":"tür"},
+    {"en":"plot","tr":"olay örgüsü"},
+    {"en":"streaming","tr":"çevrim içi yayın"},
+    {"en":"subtitle","tr":"altyazı"},
+    {"en":"special effects","tr":"özel efektler"}
+  ],
+  "c1": [
+    {"en":"protagonist","tr":"baş kahraman"},
+    {"en":"antagonist","tr":"karşıt karakter"},
+    {"en":"narrative","tr":"anlatı"},
+    {"en":"adaptation","tr":"uyarlama"},
+    {"en":"satire","tr":"hiciv"},
+    {"en":"critique","tr":"eleştiri"},
+    {"en":"improvisation","tr":"doğaçlama"},
+    {"en":"choreography","tr":"koreografi"},
+    {"en":"screenwriter","tr":"senarist"},
+    {"en":"aesthetics","tr":"estetik anlayışı"}
+  ],
+  "c2": [
+    {"en":"mise-en-scène","tr":"sahne düzeni"},
+    {"en":"juxtaposition","tr":"yan yana karşıtlık kullanımı"},
+    {"en":"cinephile","tr":"sinema tutkunu"},
+    {"en":"metafiction","tr":"üstkurmaca"},
+    {"en":"catharsis","tr":"arınma duygusu"},
+    {"en":"foreshadowing","tr":"önceden sezdirme"},
+    {"en":"intertextuality","tr":"metinlerarasılık"},
+    {"en":"montage","tr":"kurgu montajı"},
+    {"en":"symbolism","tr":"sembolizm"},
+    {"en":"verisimilitude","tr":"gerçeklik etkisi"}
+  ]
+},
+
+  "iş":{
+  "a1": [
+    {"en":"job","tr":"iş"},
+    {"en":"office","tr":"ofis"},
+    {"en":"worker","tr":"işçi"},
+    {"en":"boss","tr":"patron"},
+    {"en":"company","tr":"şirket"},
+    {"en":"shop","tr":"mağaza"},
+    {"en":"customer","tr":"müşteri"},
+    {"en":"money","tr":"para"},
+    {"en":"buy","tr":"satın almak"},
+    {"en":"sell","tr":"satmak"}
+  ],
+  "a2": [
+    {"en":"employee","tr":"çalışan"},
+    {"en":"manager","tr":"yönetici"},
+    {"en":"salary","tr":"maaş"},
+    {"en":"meeting","tr":"toplantı"},
+    {"en":"project","tr":"proje"},
+    {"en":"price","tr":"fiyat"},
+    {"en":"market","tr":"pazar"},
+    {"en":"profit","tr":"kâr"},
+    {"en":"service","tr":"hizmet"},
+    {"en":"invoice","tr":"fatura"}
+  ],
+  "b1": [
+    {"en":"department","tr":"departman"},
+    {"en":"contract","tr":"sözleşme"},
+    {"en":"budget","tr":"bütçe"},
+    {"en":"career","tr":"kariyer"},
+    {"en":"promotion","tr":"terfi"},
+    {"en":"competition","tr":"rekabet"},
+    {"en":"supplier","tr":"tedarikçi"},
+    {"en":"client","tr":"müşteri"},
+    {"en":"advertisement","tr":"reklam"},
+    {"en":"strategy","tr":"strateji"}
+  ],
+  "b2": [
+    {"en":"investment","tr":"yatırım"},
+    {"en":"negotiation","tr":"müzakere"},
+    {"en":"productivity","tr":"verimlilik"},
+    {"en":"distribution","tr":"dağıtım"},
+    {"en":"shareholder","tr":"hissedar"},
+    {"en":"entrepreneur","tr":"girişimci"},
+    {"en":"partnership","tr":"ortaklık"},
+    {"en":"revenue","tr":"gelir"},
+    {"en":"branding","tr":"markalaşma"},
+    {"en":"logistics","tr":"lojistik"}
+  ],
+  "c1": [
+    {"en":"acquisition","tr":"şirket satın alımı"},
+    {"en":"merger","tr":"şirket birleşmesi"},
+    {"en":"stakeholder","tr":"paydaş"},
+    {"en":"compliance","tr":"mevzuata uygunluk"},
+    {"en":"benchmark","tr":"kıyas ölçütü"},
+    {"en":"forecast","tr":"tahmin"},
+    {"en":"procurement","tr":"tedarik süreci"},
+    {"en":"governance","tr":"kurumsal yönetim"},
+    {"en":"diversification","tr":"çeşitlendirme"},
+    {"en":"sustainability","tr":"sürdürülebilirlik"}
+  ],
+  "c2": [
+    {"en":"capitalization","tr":"sermayelendirme"},
+    {"en":"arbitrage","tr":"arbitraj"},
+    {"en":"fiduciary duty","tr":"emanet sorumluluğu"},
+    {"en":"liquidity","tr":"likidite"},
+    {"en":"solvency","tr":"ödeme gücü"},
+    {"en":"macroeconomics","tr":"makroekonomi"},
+    {"en":"restructuring","tr":"yeniden yapılandırma"},
+    {"en":"conglomerate","tr":"holding"},
+    {"en":"monopoly","tr":"tekel"},
+    {"en":"globalization","tr":"küreselleşme"}
+  ]
+},
+
+  "eğitim":{
+  "a1": [
+    {"en":"school","tr":"okul"},
+    {"en":"teacher","tr":"öğretmen"},
+    {"en":"student","tr":"öğrenci"},
+    {"en":"classroom","tr":"sınıf"},
+    {"en":"book","tr":"kitap"},
+    {"en":"notebook","tr":"defter"},
+    {"en":"pen","tr":"kalem"},
+    {"en":"homework","tr":"ödev"},
+    {"en":"lesson","tr":"ders"},
+    {"en":"exam","tr":"sınav"}
+  ],
+  "a2": [
+    {"en":"subject","tr":"ders (konu)"},
+    {"en":"library","tr":"kütüphane"},
+    {"en":"dictionary","tr":"sözlük"},
+    {"en":"grade","tr":"not"},
+    {"en":"schedule","tr":"ders programı"},
+    {"en":"question","tr":"soru"},
+    {"en":"answer","tr":"cevap"},
+    {"en":"college","tr":"kolej"},
+    {"en":"course","tr":"kurs"},
+    {"en":"certificate","tr":"sertifika"}
+  ],
+  "b1": [
+    {"en":"assignment","tr":"ödev"},
+    {"en":"research","tr":"araştırma"},
+    {"en":"presentation","tr":"sunum"},
+    {"en":"knowledge","tr":"bilgi"},
+    {"en":"curriculum","tr":"müfredat"},
+    {"en":"laboratory","tr":"laboratuvar"},
+    {"en":"semester","tr":"dönem"},
+    {"en":"scholarship","tr":"burs"},
+    {"en":"qualification","tr":"yeterlilik"},
+    {"en":"revision","tr":"tekrar çalışması"}
+  ],
+  "b2": [
+    {"en":"assessment","tr":"değerlendirme"},
+    {"en":"academic","tr":"akademik"},
+    {"en":"discipline","tr":"akademik alan"},
+    {"en":"evaluation","tr":"değerlendirme"},
+    {"en":"undergraduate","tr":"lisans öğrencisi"},
+    {"en":"graduate","tr":"lisansüstü mezun"},
+    {"en":"dissertation","tr":"tez"},
+    {"en":"tutorial","tr":"ek ders"},
+    {"en":"supervisor","tr":"danışman"},
+    {"en":"methodology","tr":"metodoloji"}
+  ],
+  "c1": [
+    {"en":"pedagogy","tr":"pedagoji"},
+    {"en":"cognition","tr":"biliş"},
+    {"en":"literacy","tr":"okuryazarlık"},
+    {"en":"competency","tr":"yeterlilik"},
+    {"en":"interdisciplinary","tr":"disiplinler arası"},
+    {"en":"analytical thinking","tr":"analitik düşünme"},
+    {"en":"hypothesis","tr":"hipotez"},
+    {"en":"scholar","tr":"akademisyen"},
+    {"en":"educator","tr":"eğitimci"},
+    {"en":"curricular","tr":"müfredata ait"}
+  ],
+  "c2": [
+    {"en":"epistemology","tr":"epistemoloji"},
+    {"en":"heuristics","tr":"sezgisel yöntemler"},
+    {"en":"didactics","tr":"öğretim bilimi"},
+    {"en":"metacognition","tr":"üstbiliş"},
+    {"en":"constructivism","tr":"yapılandırmacılık"},
+    {"en":"phenomenology","tr":"fenomenoloji"},
+    {"en":"hermeneutics","tr":"yorumbilim"},
+    {"en":"postgraduate","tr":"lisansüstü öğrenci"},
+    {"en":"multidisciplinary","tr":"çok disiplinli"},
+    {"en":"empirical research","tr":"ampirik araştırma"}
+  ]
+},
+
+  "tarih":{
+  "a1": [
+    {"en":"history","tr":"tarih"},
+    {"en":"past","tr":"geçmiş"},
+    {"en":"king","tr":"kral"},
+    {"en":"queen","tr":"kraliçe"},
+    {"en":"castle","tr":"kale"},
+    {"en":"war","tr":"savaş"},
+    {"en":"soldier","tr":"asker"},
+    {"en":"flag","tr":"bayrak"},
+    {"en":"country","tr":"ülke"},
+    {"en":"battle","tr":"savaş (muharebe)"}
+  ],
+  "a2": [
+    {"en":"empire","tr":"imparatorluk"},
+    {"en":"century","tr":"yüzyıl"},
+    {"en":"ancient","tr":"antik"},
+    {"en":"leader","tr":"lider"},
+    {"en":"peace","tr":"barış"},
+    {"en":"weapon","tr":"silah"},
+    {"en":"government","tr":"hükümet"},
+    {"en":"border","tr":"sınır"},
+    {"en":"victory","tr":"zafer"},
+    {"en":"defeat","tr":"yenilgi"}
+  ],
+  "b1": [
+    {"en":"civilization","tr":"medeniyet"},
+    {"en":"dynasty","tr":"hanedan"},
+    {"en":"revolution","tr":"devrim"},
+    {"en":"colony","tr":"sömürge"},
+    {"en":"independence","tr":"bağımsızlık"},
+    {"en":"treaty","tr":"antlaşma"},
+    {"en":"invasion","tr":"istila"},
+    {"en":"heritage","tr":"miras"},
+    {"en":"monarchy","tr":"monarşi"},
+    {"en":"chronology","tr":"kronoloji"}
+  ],
+  "b2": [
+    {"en":"archaeology","tr":"arkeoloji"},
+    {"en":"artifact","tr":"tarihi eser"},
+    {"en":"democracy","tr":"demokrasi"},
+    {"en":"dictatorship","tr":"diktatörlük"},
+    {"en":"rebellion","tr":"isyan"},
+    {"en":"occupation","tr":"işgal"},
+    {"en":"historian","tr":"tarihçi"},
+    {"en":"migration","tr":"göç"},
+    {"en":"alliance","tr":"ittifak"},
+    {"en":"legacy","tr":"miras"}
+  ],
+  "c1": [
+    {"en":"sovereignty","tr":"egemenlik"},
+    {"en":"imperialism","tr":"emperyalizm"},
+    {"en":"nationalism","tr":"milliyetçilik"},
+    {"en":"diplomacy","tr":"diplomasi"},
+    {"en":"annexation","tr":"ilhak"},
+    {"en":"succession","tr":"tahta geçiş"},
+    {"en":"constitutional monarchy","tr":"anayasal monarşi"},
+    {"en":"historical narrative","tr":"tarihsel anlatı"},
+    {"en":"primary source","tr":"birincil kaynak"},
+    {"en":"feudalism","tr":"feodalizm"}
+  ],
+  "c2": [
+    {"en":"historiography","tr":"tarih yazıcılığı"},
+    {"en":"revisionism","tr":"revizyonizm"},
+    {"en":"hegemony","tr":"hegemonya"},
+    {"en":"geopolitics","tr":"jeopolitik"},
+    {"en":"autocracy","tr":"otokrasi"},
+    {"en":"ethnogenesis","tr":"etnogenez"},
+    {"en":"colonialism","tr":"sömürgecilik"},
+    {"en":"decolonization","tr":"sömürgeden kurtulma"},
+    {"en":"sociopolitical","tr":"sosyopolitik"},
+    {"en":"archival research","tr":"arşiv araştırması"}
+  ]
+},
+
+ "cografya":{
+  "a1": [
+    {"en":"map","tr":"harita"},
+    {"en":"world","tr":"dünya"},
+    {"en":"country","tr":"ülke"},
+    {"en":"city","tr":"şehir"},
+    {"en":"river","tr":"nehir"},
+    {"en":"mountain","tr":"dağ"},
+    {"en":"sea","tr":"deniz"},
+    {"en":"lake","tr":"göl"},
+    {"en":"island","tr":"ada"},
+    {"en":"forest","tr":"orman"}
+  ],
+  "a2": [
+    {"en":"ocean","tr":"okyanus"},
+    {"en":"desert","tr":"çöl"},
+    {"en":"valley","tr":"vadi"},
+    {"en":"hill","tr":"tepe"},
+    {"en":"waterfall","tr":"şelale"},
+    {"en":"coast","tr":"kıyı"},
+    {"en":"beach","tr":"plaj"},
+    {"en":"continent","tr":"kıta"},
+    {"en":"capital city","tr":"başkent"},
+    {"en":"climate","tr":"iklim"}
+  ],
+  "b1": [
+    {"en":"region","tr":"bölge"},
+    {"en":"population","tr":"nüfus"},
+    {"en":"border","tr":"sınır"},
+    {"en":"volcano","tr":"yanardağ"},
+    {"en":"earthquake","tr":"deprem"},
+    {"en":"natural resource","tr":"doğal kaynak"},
+    {"en":"ecosystem","tr":"ekosistem"},
+    {"en":"peninsula","tr":"yarımada"},
+    {"en":"plateau","tr":"plato"},
+    {"en":"hemisphere","tr":"yarımküre"}
+  ],
+  "b2": [
+    {"en":"altitude","tr":"rakım"},
+    {"en":"latitude","tr":"enlem"},
+    {"en":"longitude","tr":"boylam"},
+    {"en":"terrain","tr":"arazi yapısı"},
+    {"en":"erosion","tr":"erozyon"},
+    {"en":"glacier","tr":"buzul"},
+    {"en":"biodiversity","tr":"biyolojik çeşitlilik"},
+    {"en":"urbanization","tr":"kentleşme"},
+    {"en":"vegetation","tr":"bitki örtüsü"},
+    {"en":"watershed","tr":"su havzası"}
+  ],
+  "c1": [
+    {"en":"topography","tr":"topografya"},
+    {"en":"demography","tr":"demografi"},
+    {"en":"geomorphology","tr":"jeomorfoloji"},
+    {"en":"sedimentation","tr":"çökelme"},
+    {"en":"precipitation","tr":"yağış"},
+    {"en":"tectonic plate","tr":"tektonik levha"},
+    {"en":"continental drift","tr":"kıtasal kayma"},
+    {"en":"aquifer","tr":"yeraltı su tabakası"},
+    {"en":"arid region","tr":"kurak bölge"},
+    {"en":"landform","tr":"yeryüzü şekli"}
+  ],
+  "c2": [
+    {"en":"cartography","tr":"kartografya"},
+    {"en":"hydrology","tr":"hidroloji"},
+    {"en":"orography","tr":"dağ bilimi"},
+    {"en":"biogeography","tr":"biyocoğrafya"},
+    {"en":"anthropogenic","tr":"insan kaynaklı"},
+    {"en":"permafrost","tr":"kalıcı donmuş toprak"},
+    {"en":"fluvial erosion","tr":"akarsu erozyonu"},
+    {"en":"geospatial analysis","tr":"coğrafi mekânsal analiz"},
+    {"en":"climatology","tr":"iklim bilimi"},
+    {"en":"remote sensing","tr":"uzaktan algılama"}
+  ]
+},
+  "Psikoloji":{
+  "a1": [
+    {"en":"mind","tr":"zihin"},
+    {"en":"feeling","tr":"duygu"},
+    {"en":"happy","tr":"mutlu"},
+    {"en":"sad","tr":"üzgün"},
+    {"en":"angry","tr":"kızgın"},
+    {"en":"afraid","tr":"korkmuş"},
+    {"en":"calm","tr":"sakin"},
+    {"en":"stress","tr":"stres"},
+    {"en":"dream","tr":"rüya"},
+    {"en":"memory","tr":"hafıza"}
+  ],
+  "a2": [
+    {"en":"emotion","tr":"duygu"},
+    {"en":"confidence","tr":"öz güven"},
+    {"en":"personality","tr":"kişilik"},
+    {"en":"habit","tr":"alışkanlık"},
+    {"en":"choice","tr":"seçim"},
+    {"en":"decision","tr":"karar"},
+    {"en":"behavior","tr":"davranış"},
+    {"en":"fear","tr":"korku"},
+    {"en":"hope","tr":"umut"},
+    {"en":"motivation","tr":"motivasyon"}
+  ],
+  "b1": [
+    {"en":"anxiety","tr":"kaygı"},
+    {"en":"self-esteem","tr":"öz saygı"},
+    {"en":"concentration","tr":"konsantrasyon"},
+    {"en":"communication","tr":"iletişim"},
+    {"en":"empathy","tr":"empati"},
+    {"en":"relationship","tr":"ilişki"},
+    {"en":"self-control","tr":"öz denetim"},
+    {"en":"attitude","tr":"tutum"},
+    {"en":"perception","tr":"algı"},
+    {"en":"conflict","tr":"çatışma"}
+  ],
+  "b2": [
+    {"en":"cognition","tr":"biliş"},
+    {"en":"resilience","tr":"psikolojik dayanıklılık"},
+    {"en":"coping strategy","tr":"başa çıkma stratejisi"},
+    {"en":"personality trait","tr":"kişilik özelliği"},
+    {"en":"emotional intelligence","tr":"duygusal zekâ"},
+    {"en":"well-being","tr":"iyi oluş"},
+    {"en":"bias","tr":"önyargı"},
+    {"en":"trauma","tr":"travma"},
+    {"en":"observation","tr":"gözlem"},
+    {"en":"awareness","tr":"farkındalık"}
+  ],
+  "c1": [
+    {"en":"psychotherapy","tr":"psikoterapi"},
+    {"en":"subconscious","tr":"bilinçaltı"},
+    {"en":"cognitive bias","tr":"bilişsel önyargı"},
+    {"en":"conditioning","tr":"koşullanma"},
+    {"en":"attachment theory","tr":"bağlanma kuramı"},
+    {"en":"behavioral pattern","tr":"davranış örüntüsü"},
+    {"en":"personality disorder","tr":"kişilik bozukluğu"},
+    {"en":"reinforcement","tr":"pekiştirme"},
+    {"en":"cognitive development","tr":"bilişsel gelişim"},
+    {"en":"psychological assessment","tr":"psikolojik değerlendirme"}
+  ],
+  "c2": [
+    {"en":"metacognition","tr":"üstbiliş"},
+    {"en":"neuroplasticity","tr":"nöroplastisite"},
+    {"en":"psychopathology","tr":"psikopatoloji"},
+    {"en":"psychoanalysis","tr":"psikanaliz"},
+    {"en":"cognitive dissonance","tr":"bilişsel çelişki"},
+    {"en":"self-actualization","tr":"kendini gerçekleştirme"},
+    {"en":"heuristic","tr":"sezgisel yöntem"},
+    {"en":"affective neuroscience","tr":"duygusal sinirbilim"},
+    {"en":"behavioral neuroscience","tr":"davranışsal sinirbilim"},
+    {"en":"executive function","tr":"yürütücü işlev"}
+  ]
+},
+  "bahce":{
+  "a1": [
+    {"en":"garden","tr":"bahçe"},
+    {"en":"flower","tr":"çiçek"},
+    {"en":"tree","tr":"ağaç"},
+    {"en":"grass","tr":"çim"},
+    {"en":"plant","tr":"bitki"},
+    {"en":"seed","tr":"tohum"},
+    {"en":"water","tr":"sulamak"},
+    {"en":"leaf","tr":"yaprak"},
+    {"en":"pot","tr":"saksı"},
+    {"en":"soil","tr":"toprak"}
+  ],
+  "a2": [
+    {"en":"branch","tr":"dal"},
+    {"en":"root","tr":"kök"},
+    {"en":"vegetable garden","tr":"sebze bahçesi"},
+    {"en":"fruit tree","tr":"meyve ağacı"},
+    {"en":"weed","tr":"yabani ot"},
+    {"en":"watering can","tr":"sulama kabı"},
+    {"en":"shovel","tr":"kürek"},
+    {"en":"fence","tr":"çit"},
+    {"en":"grow","tr":"yetiştirmek"},
+    {"en":"harvest","tr":"hasat etmek"}
+  ],
+  "b1": [
+    {"en":"fertilizer","tr":"gübre"},
+    {"en":"greenhouse","tr":"sera"},
+    {"en":"gardener","tr":"bahçıvan"},
+    {"en":"compost","tr":"kompost"},
+    {"en":"prune","tr":"budamak"},
+    {"en":"seedling","tr":"fide"},
+    {"en":"irrigation","tr":"sulama sistemi"},
+    {"en":"pesticide","tr":"tarım ilacı"},
+    {"en":"organic farming","tr":"organik tarım"},
+    {"en":"cultivate","tr":"ekip yetiştirmek"}
+  ],
+  "b2": [
+    {"en":"mulch","tr":"malç"},
+    {"en":"horticulture","tr":"bahçecilik bilimi"},
+    {"en":"landscaping","tr":"peyzaj düzenlemesi"},
+    {"en":"perennial","tr":"çok yıllık bitki"},
+    {"en":"annual plant","tr":"tek yıllık bitki"},
+    {"en":"drainage","tr":"drenaj"},
+    {"en":"germination","tr":"çimlenme"},
+    {"en":"pollination","tr":"tozlaşma"},
+    {"en":"raised bed","tr":"yükseltilmiş bahçe yatağı"},
+    {"en":"cultivation","tr":"yetiştirme"}
+  ],
+  "c1": [
+    {"en":"propagation","tr":"çoğaltma"},
+    {"en":"soil fertility","tr":"toprak verimliliği"},
+    {"en":"biodiversity","tr":"biyolojik çeşitlilik"},
+    {"en":"ornamental plant","tr":"süs bitkisi"},
+    {"en":"native species","tr":"yerli tür"},
+    {"en":"crop rotation","tr":"ürün rotasyonu"},
+    {"en":"soil composition","tr":"toprak yapısı"},
+    {"en":"sustainable gardening","tr":"sürdürülebilir bahçecilik"},
+    {"en":"plant nutrition","tr":"bitki beslenmesi"},
+    {"en":"soil erosion","tr":"toprak erozyonu"}
+  ],
+  "c2": [
+    {"en":"arboriculture","tr":"ağaç yetiştiriciliği"},
+    {"en":"agronomy","tr":"tarım bilimi"},
+    {"en":"phytopathology","tr":"bitki hastalıkları bilimi"},
+    {"en":"micropropagation","tr":"mikroçoğaltım"},
+    {"en":"hydroponics","tr":"topraksız tarım"},
+    {"en":"vermicomposting","tr":"solucan kompostu üretimi"},
+    {"en":"soil microbiome","tr":"toprak mikrobiyomu"},
+    {"en":"xeriscaping","tr":"az su isteyen peyzaj tasarımı"},
+    {"en":"agroecology","tr":"agroekoloji"},
+    {"en":"plant physiology","tr":"bitki fizyolojisi"}
+  ]
+},
+ "moda":{
+  "a1": [
+    {"en":"shirt","tr":"gömlek"},
+    {"en":"T-shirt","tr":"tişört"},
+    {"en":"dress","tr":"elbise"},
+    {"en":"skirt","tr":"etek"},
+    {"en":"pants","tr":"pantolon"},
+    {"en":"jacket","tr":"ceket"},
+    {"en":"shoes","tr":"ayakkabı"},
+    {"en":"hat","tr":"şapka"},
+    {"en":"bag","tr":"çanta"},
+    {"en":"socks","tr":"çorap"}
+  ],
+  "a2": [
+    {"en":"jeans","tr":"kot pantolon"},
+    {"en":"sweater","tr":"kazak"},
+    {"en":"hoodie","tr":"kapüşonlu sweatshirt"},
+    {"en":"scarf","tr":"atkı"},
+    {"en":"gloves","tr":"eldiven"},
+    {"en":"belt","tr":"kemer"},
+    {"en":"boots","tr":"bot"},
+    {"en":"necklace","tr":"kolye"},
+    {"en":"bracelet","tr":"bileklik"},
+    {"en":"earrings","tr":"küpe"}
+  ],
+  "b1": [
+    {"en":"fashion trend","tr":"moda akımı"},
+    {"en":"designer","tr":"moda tasarımcısı"},
+    {"en":"outfit","tr":"kombin"},
+    {"en":"fabric","tr":"kumaş"},
+    {"en":"cotton","tr":"pamuk"},
+    {"en":"leather","tr":"deri"},
+    {"en":"silk","tr":"ipek"},
+    {"en":"pattern","tr":"desen"},
+    {"en":"casual wear","tr":"günlük giyim"},
+    {"en":"formal wear","tr":"resmî giyim"}
+  ],
+  "b2": [
+    {"en":"accessory","tr":"aksesuar"},
+    {"en":"tailor","tr":"terzi"},
+    {"en":"runway","tr":"defile podyumu"},
+    {"en":"collection","tr":"koleksiyon"},
+    {"en":"garment","tr":"giysi"},
+    {"en":"fit","tr":"bedene uyum"},
+    {"en":"textile","tr":"tekstil"},
+    {"en":"fashion industry","tr":"moda sektörü"},
+    {"en":"luxury brand","tr":"lüks marka"},
+    {"en":"vintage","tr":"vintage"}
+  ],
+  "c1": [
+    {"en":"haute couture","tr":"özel dikim moda"},
+    {"en":"minimalism","tr":"minimalizm"},
+    {"en":"aesthetics","tr":"estetik anlayışı"},
+    {"en":"fashion statement","tr":"stil ifadesi"},
+    {"en":"craftsmanship","tr":"işçilik"},
+    {"en":"embroidery","tr":"nakış"},
+    {"en":"sustainable fashion","tr":"sürdürülebilir moda"},
+    {"en":"garment production","tr":"giysi üretimi"},
+    {"en":"wardrobe","tr":"giyim koleksiyonu"},
+    {"en":"tailoring","tr":"terzilik"}
+  ],
+  "c2": [
+    {"en":"couturier","tr":"moda evi tasarımcısı"},
+    {"en":"bespoke","tr":"kişiye özel dikilmiş"},
+    {"en":"draping","tr":"kumaş drapajı"},
+    {"en":"couture","tr":"yüksek moda"},
+    {"en":"avant-garde","tr":"avangart"},
+    {"en":"silhouette","tr":"giysi silüeti"},
+    {"en":"embellishment","tr":"süsleme detayı"},
+    {"en":"mass production","tr":"seri üretim"},
+    {"en":"apparel manufacturing","tr":"hazır giyim üretimi"},
+    {"en":"fashion merchandising","tr":"moda mağazacılığı"}
+  ]
+},
+  "hava":{
+  "a1": [
+    {"en":"weather","tr":"hava durumu"},
+    {"en":"sun","tr":"güneş"},
+    {"en":"rain","tr":"yağmur"},
+    {"en":"snow","tr":"kar"},
+    {"en":"wind","tr":"rüzgâr"},
+    {"en":"cloud","tr":"bulut"},
+    {"en":"hot","tr":"sıcak"},
+    {"en":"cold","tr":"soğuk"},
+    {"en":"storm","tr":"fırtına"},
+    {"en":"sky","tr":"gökyüzü"}
+  ],
+  "a2": [
+    {"en":"fog","tr":"sis"},
+    {"en":"ice","tr":"buz"},
+    {"en":"temperature","tr":"sıcaklık"},
+    {"en":"forecast","tr":"hava tahmini"},
+    {"en":"sunshine","tr":"güneş ışığı"},
+    {"en":"rainbow","tr":"gökkuşağı"},
+    {"en":"lightning","tr":"şimşek"},
+    {"en":"thunder","tr":"gök gürültüsü"},
+    {"en":"humid","tr":"nemli"},
+    {"en":"dry","tr":"kuru"}
+  ],
+  "b1": [
+    {"en":"climate","tr":"iklim"},
+    {"en":"humidity","tr":"nem"},
+    {"en":"breeze","tr":"hafif rüzgâr"},
+    {"en":"heatwave","tr":"sıcak hava dalgası"},
+    {"en":"frost","tr":"kırağı"},
+    {"en":"hail","tr":"dolu"},
+    {"en":"drizzle","tr":"çiseleme"},
+    {"en":"freezing","tr":"dondurucu soğuk"},
+    {"en":"weather report","tr":"hava durumu raporu"},
+    {"en":"season","tr":"mevsim"}
+  ],
+  "b2": [
+    {"en":"precipitation","tr":"yağış"},
+    {"en":"atmosphere","tr":"atmosfer"},
+    {"en":"air pressure","tr":"hava basıncı"},
+    {"en":"visibility","tr":"görüş mesafesi"},
+    {"en":"drought","tr":"kuraklık"},
+    {"en":"flood","tr":"sel"},
+    {"en":"blizzard","tr":"tipi"},
+    {"en":"hurricane","tr":"kasırga"},
+    {"en":"tornado","tr":"hortum"},
+    {"en":"meteorologist","tr":"meteorolog"}
+  ],
+  "c1": [
+    {"en":"barometric pressure","tr":"barometrik basınç"},
+    {"en":"climate change","tr":"iklim değişikliği"},
+    {"en":"greenhouse effect","tr":"sera etkisi"},
+    {"en":"atmospheric circulation","tr":"atmosfer dolaşımı"},
+    {"en":"dew point","tr":"çiğ noktası"},
+    {"en":"air mass","tr":"hava kütlesi"},
+    {"en":"cold front","tr":"soğuk hava cephesi"},
+    {"en":"warm front","tr":"sıcak hava cephesi"},
+    {"en":"extreme weather","tr":"aşırı hava olayları"},
+    {"en":"weather pattern","tr":"hava düzeni"}
+  ],
+  "c2": [
+    {"en":"meteorology","tr":"meteoroloji"},
+    {"en":"climatology","tr":"iklim bilimi"},
+    {"en":"troposphere","tr":"troposfer"},
+    {"en":"stratosphere","tr":"stratosfer"},
+    {"en":"atmospheric instability","tr":"atmosferik kararsızlık"},
+    {"en":"convection","tr":"konveksiyon"},
+    {"en":"evapotranspiration","tr":"evapotranspirasyon"},
+    {"en":"orographic rainfall","tr":"orografik yağış"},
+    {"en":"synoptic chart","tr":"sinoptik hava haritası"},
+    {"en":"jet stream","tr":"jet akımı"}
+  ]
+},
+
+  "doğa":{
+  "a1": [
+    {"en":"tree","tr":"ağaç"},
+    {"en":"flower","tr":"çiçek"},
+    {"en":"grass","tr":"çimen"},
+    {"en":"river","tr":"nehir"},
+    {"en":"lake","tr":"göl"},
+    {"en":"mountain","tr":"dağ"},
+    {"en":"forest","tr":"orman"},
+    {"en":"rock","tr":"kaya"},
+    {"en":"beach","tr":"plaj"},
+    {"en":"leaf","tr":"yaprak"}
+  ],
+  "a2": [
+    {"en":"ocean","tr":"okyanus"},
+    {"en":"waterfall","tr":"şelale"},
+    {"en":"valley","tr":"vadi"},
+    {"en":"desert","tr":"çöl"},
+    {"en":"hill","tr":"tepe"},
+    {"en":"cave","tr":"mağara"},
+    {"en":"island","tr":"ada"},
+    {"en":"branch","tr":"dal"},
+    {"en":"root","tr":"kök"},
+    {"en":"path","tr":"patika"}
+  ],
+  "b1": [
+    {"en":"ecosystem","tr":"ekosistem"},
+    {"en":"wildlife","tr":"yaban hayatı"},
+    {"en":"habitat","tr":"yaşam alanı"},
+    {"en":"species","tr":"tür"},
+    {"en":"environment","tr":"çevre"},
+    {"en":"cliff","tr":"uçurum"},
+    {"en":"wetland","tr":"sulak alan"},
+    {"en":"nature reserve","tr":"doğa koruma alanı"},
+    {"en":"plant life","tr":"bitki örtüsü"},
+    {"en":"natural resource","tr":"doğal kaynak"}
+  ],
+  "b2": [
+    {"en":"biodiversity","tr":"biyolojik çeşitlilik"},
+    {"en":"conservation","tr":"koruma"},
+    {"en":"erosion","tr":"erozyon"},
+    {"en":"vegetation","tr":"bitki örtüsü"},
+    {"en":"endangered species","tr":"nesli tükenmekte olan tür"},
+    {"en":"renewable resource","tr":"yenilenebilir kaynak"},
+    {"en":"pollution","tr":"kirlilik"},
+    {"en":"deforestation","tr":"ormansızlaşma"},
+    {"en":"natural disaster","tr":"doğal afet"},
+    {"en":"ecology","tr":"ekoloji"}
+  ],
+  "c1": [
+    {"en":"sustainability","tr":"sürdürülebilirlik"},
+    {"en":"ecosystem balance","tr":"ekosistem dengesi"},
+    {"en":"biosphere","tr":"biyosfer"},
+    {"en":"habitat loss","tr":"yaşam alanı kaybı"},
+    {"en":"ecological footprint","tr":"ekolojik ayak izi"},
+    {"en":"reforestation","tr":"yeniden ağaçlandırma"},
+    {"en":"carbon footprint","tr":"karbon ayak izi"},
+    {"en":"environmental protection","tr":"çevre koruma"},
+    {"en":"invasive species","tr":"istilacı tür"},
+    {"en":"natural heritage","tr":"doğal miras"}
+  ],
+  "c2": [
+    {"en":"biogeochemistry","tr":"biyojeokimya"},
+    {"en":"geomorphology","tr":"jeomorfoloji"},
+    {"en":"ecological succession","tr":"ekolojik ardıllık"},
+    {"en":"anthropogenic impact","tr":"insan kaynaklı etki"},
+    {"en":"biodiversity hotspot","tr":"biyolojik çeşitlilik sıcak noktası"},
+    {"en":"ecosystem resilience","tr":"ekosistem dayanıklılığı"},
+    {"en":"environmental degradation","tr":"çevresel bozulma"},
+    {"en":"habitat fragmentation","tr":"yaşam alanı parçalanması"},
+    {"en":"biomass","tr":"biyokütle"},
+    {"en":"conservation biology","tr":"koruma biyolojisi"}
+  ]
 }
 
 
