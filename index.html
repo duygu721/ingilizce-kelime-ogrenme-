@@ -10,16 +10,16 @@
     }
 
     :root {
-      --green: #58cc02;
-      --green-dark: #46a302;
-      --green-shadow: #3f9700;
-      --blue: #1cb0f6;
-      --yellow: #ffc800;
-      --red: #ff4b4b;
-      --ink: #243042;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --soft: #f7fce9;
+      --green: #a78bfa;
+      --green-dark: #7c3aed;
+      --green-shadow: #8b5cf6;
+      --blue: #93fdc8;
+      --yellow: #fde68a;
+      --red: #f87171;
+      --ink: #3f3a56;
+      --muted: #7c748f;
+      --line: #e9d5ff;
+      --soft: #faf5ff;
     }
 
     body {
@@ -62,7 +62,8 @@
     }
 
     #game-area,
-    #level-selection {
+    #level-selection,
+    #category-selection {
       display: none;
     }
 
@@ -76,53 +77,123 @@
 
     .cat-btn,
     #next-btn,
-    #answers button {
+    #answers button,
+    .back-btn,
+    .auth-submit-btn,
+    .action-add-btn {
       border-radius: 16px;
       font-weight: 900;
       letter-spacing: 0;
       transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease, opacity 0.12s ease;
+      cursor: pointer;
     }
 
-    .cat-btn {
+    .cat-btn, .auth-submit-btn, .action-add-btn {
       min-height: 56px;
       padding: 14px 20px;
       margin: 0;
       border: none;
       border-bottom: 5px solid var(--green-shadow);
-      cursor: pointer;
       font-size: 18px;
       color: white;
       background: var(--green);
       box-shadow: 0 8px 18px rgba(88, 204, 2, 0.22);
     }
 
+    .action-add-btn {
+      background: #8b5cf6;
+      border-bottom-color: #6d28d9;
+      box-shadow: 0 8px 18px rgba(139, 92, 246, 0.25);
+    }
+
+    /* ÜYELİK PANELİ */
+    #auth-area {
+      width: min(400px, 100%);
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .auth-input {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      outline: none;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .auth-input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
+    }
+
+    .auth-toggle-text {
+      margin-top: 18px;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .auth-toggle-text span {
+      color: var(--green-dark);
+      text-decoration: underline;
+    }
+
+    .back-btn {
+      min-height: 40px;
+      padding: 8px 16px;
+      border: none;
+      border-bottom: 4px solid #b15050;
+      font-size: 14px;
+      color: white;
+      background: #f87171;
+      box-shadow: 0 4px 10px rgba(248, 113, 113, 0.2);
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .back-btn:active {
+      transform: translateY(2px);
+      border-bottom-width: 1px;
+    }
+
     .cat-btn:hover:not(:disabled),
     #next-btn:hover:not(:disabled),
-    #answers button:hover:not(:disabled) {
+    #answers button:hover:not(:disabled),
+    .auth-submit-btn:hover,
+    .action-add-btn:hover {
       transform: translateY(-2px);
       filter: brightness(1.02);
     }
 
     .cat-btn:active:not(:disabled),
     #next-btn:active:not(:disabled),
-    #answers button:active:not(:disabled) {
+    #answers button:active:not(:disabled),
+    .auth-submit-btn:active,
+    .action-add-btn:active {
       transform: translateY(2px);
       border-bottom-width: 2px;
     }
 
-    .cat-btn:disabled,
-    #answers button:disabled,
-    #next-btn:disabled {
-      cursor: not-allowed;
-      opacity: 0.62;
-      transform: none;
+    #game-header-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
     #status-bar {
+      flex: 1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-bottom: 18px;
       padding: 8px;
       border: 2px solid #d7efc2;
       border-radius: 18px;
@@ -260,169 +331,158 @@
       display: grid;
     }
 
-    .surprise-card {
-      min-width: min(420px, calc(100vw - 34px));
-      padding: 24px 28px;
-      border: 4px solid white;
-      border-radius: 28px;
-      background: var(--green);
-      color: white;
-      font-size: clamp(30px, 7vw, 58px);
-      font-weight: 1000;
-      box-shadow: 0 22px 70px rgba(36, 48, 66, 0.28);
-      animation: popSurprise 0.9s ease forwards;
-    }
-
-    .wrong-pop {
-      background: var(--red);
-      animation: wrongSurprise 0.58s ease forwards;
-    }
-
-    .burst-piece {
+    #cat-meme {
       position: fixed;
+      right: 30px;
+      bottom: 30px;
+      width: 150px;
+      height: 150px;
+      display: none;
+      z-index: 999;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+      border: 3px solid white;
+      background: white;
+      pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+
+    #cat-meme.show {
+      display: block;
+    }
+
+    #cat-meme.pop-center {
+      display: block;
       left: 50%;
       top: 50%;
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      z-index: 9998;
-      pointer-events: none;
-      animation: burst 0.8s ease-out forwards;
+      right: auto;
+      bottom: auto;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      animation: catCenterPop 0.65s ease;
     }
 
-    .shake {
-      animation: shakeScreen 0.38s ease;
+    @keyframes catCenterPop {
+      0% { transform: translate(-50%, -50%) scale(0.45) rotate(-8deg); opacity: 0; }
+      45% { transform: translate(-50%, -50%) scale(1.08) rotate(3deg); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
     }
 
-    @keyframes popSurprise {
-      0% {
-        transform: scale(0.42) rotate(-5deg);
-        opacity: 0;
-      }
-
-      35% {
-        transform: scale(1.12) rotate(2deg);
-        opacity: 1;
-      }
-
-      72% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-      }
-
-      100% {
-        transform: scale(0.92) rotate(0deg);
-        opacity: 0;
-      }
+    /* KELİME EKLEME MODALI */
+    .custom-modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
     }
 
-    @keyframes wrongSurprise {
-      0% {
-        transform: scale(0.85);
-        opacity: 0;
-      }
-
-      20% {
-        transform: scale(1.02);
-        opacity: 1;
-      }
-
-      100% {
-        transform: scale(0.95);
-        opacity: 0;
-      }
+    .custom-modal-card {
+      background: white;
+      padding: 30px;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 440px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      text-align: left;
     }
 
-    @keyframes burst {
-      from {
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-      }
-
-      to {
-        transform: translate(var(--x), var(--y)) scale(0.15);
-        opacity: 0;
-      }
+    .custom-modal-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--green-dark);
     }
 
-    @keyframes shakeScreen {
-      0%, 100% {
-        transform: translateX(0);
-      }
-
-      20% {
-        transform: translateX(-10px);
-      }
-
-      40% {
-        transform: translateX(10px);
-      }
-
-      60% {
-        transform: translateX(-6px);
-      }
-
-      80% {
-        transform: translateX(6px);
-      }
+    .custom-modal-card p {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
     }
 
     @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-
-      .container {
-        min-height: calc(100vh - 20px);
-        padding: 18px 14px;
-        border-radius: 20px;
-      }
-
-      #status-bar {
-        grid-template-columns: 1fr;
-      }
-
-      #answers {
-        grid-template-columns: 1fr;
-      }
-
-      .cat-btn,
-      #input-area button,
-      #user-input,
-      #cant-listen-btn {
-        width: 100%;
-        max-width: none;
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      #input-area button {
-        margin-top: 10px;
-      }
+      body { padding: 10px; }
+      .container { min-height: calc(100vh - 20px); padding: 18px 14px; border-radius: 20px; }
+      #game-header-row { flex-direction: column; align-items: stretch; }
+      #status-bar { grid-template-columns: 1fr; }
+      #answers { grid-template-columns: 1fr; }
+      .cat-btn, #input-area button, #user-input, #cant-listen-btn, .back-btn, .auth-submit-btn, .action-add-btn { width: 100%; max-width: none; margin-left: 0; margin-right: 0; }
+      #input-area button { margin-top: 10px; }
+      #cat-meme { width: 110px; height: 110px; right: 15px; bottom: 15px; }
     }
   </style>
 </head>
 <body>
+  <img id="cat-meme" src="" alt="Kedi tepkisi">
   <div id="surprise-effect"></div>
 
+  <!-- ÖZEL KELİME EKLEME MODALI -->
+  <div id="add-word-modal" class="custom-modal-backdrop">
+    <div class="custom-modal-card">
+      <h3>➕ Yeni Kelime Ekle</h3>
+      <p>Kendi kategorinizi veya seviyenizi oluşturup kelimenizi kaydedin.</p>
+      
+      <input type="text" id="custom-cat" class="auth-input" placeholder="Kategori (örn: Yazılım, Seyahat)" autocomplete="off">
+      <input type="text" id="custom-lvl" class="auth-input" placeholder="Seviye / Sınıf (örn: A1, Temel, 1. Sınıf)" autocomplete="off">
+      <input type="text" id="custom-en" class="auth-input" placeholder="İngilizce Kelime (örn: Algorithm)" autocomplete="off">
+      <input type="text" id="custom-tr" class="auth-input" placeholder="Türkçe Anlamı (örn: Algoritma)" autocomplete="off">
+
+      <div style="display: flex; gap: 12px; margin-top: 10px;">
+        <button class="back-btn" style="flex: 1; min-height: 48px; font-size: 16px; border-radius: 14px;" onclick="closeAddWordModal()">İptal</button>
+        <button class="cat-btn" style="flex: 1.5; min-height: 48px; font-size: 16px; background: #10b981; border-bottom-color: #059669;" onclick="saveCustomWord()">Kaydet ✨</button>
+      </div>
+    </div>
+  </div>
+
   <main class="container">
+
+    <section id="auth-area">
+      <h1 id="auth-title">Giriş Yap</h1>
+      <p id="auth-desc" style="color: #6b7280; font-weight: 800; margin-bottom: 24px;">Kelime serüvenine kaldığın yerden devam et</p>
+      
+      <input type="email" id="auth-email" class="auth-input" placeholder="E-posta Adresiniz" autocomplete="off">
+      <input type="password" id="auth-password" class="auth-input" placeholder="Şifreniz">
+      
+      <button id="auth-submit-btn" class="auth-submit-btn" style="width: 100%; margin-top: 10px;">Giriş Yap 🚀</button>
+      
+      <p id="auth-toggle" class="auth-toggle-text">Hesabın yok mu? <span>Kayıt Ol</span></p>
+    </section>
+
     <section id="category-selection">
       <h1>Kelime Master</h1>
-      <p style="margin: 0; color: #6b7280; font-weight: 800;">İlgi alanını seç ve seriye başla</p>
+      <p style="margin: 0 0 20px; color: #6b7280; font-weight: 800;">İlgi alanını seç veya kendi kelimeni ekle</p>
+      
+      <button class="action-add-btn" style="width: 100%; margin-bottom: 15px;" onclick="openAddWordModal()">
+        ✨ ➕ Kendi Kelimeni / Kategorini Ekle
+      </button>
+
       <div id="category-buttons"></div>
     </section>
 
     <section id="level-selection">
+      <div style="text-align: left; margin-bottom: 10px;">
+        <button class="back-btn" onclick="goBack()">⬅ Geri Dön</button>
+      </div>
       <h1>Seviye Seç</h1>
       <p style="margin: 0; color: #6b7280; font-weight: 800;">Hangi seviyeden devam ediyorsun?</p>
       <div id="level-buttons"></div>
     </section>
 
     <section id="game-area">
-      <div id="status-bar">
-        <div>Kategori: <span id="stat-cat">-</span></div>
-        <div>Seviye: <span id="stat-lvl">-</span></div>
-        <div>Tamamlanan: <span id="stat-count">0</span></div>
+      <div id="game-header-row">
+        <button class="back-btn" onclick="goBack()">⬅ Geri Dön</button>
+        <div id="status-bar">
+          <div>Kategori: <span id="stat-cat">-</span></div>
+          <div>Seviye: <span id="stat-lvl">-</span></div>
+          <div>Puan: <span id="stat-count">0</span></div>
+        </div>
       </div>
 
       <div id="level-step-info">Aşama: 1</div>
