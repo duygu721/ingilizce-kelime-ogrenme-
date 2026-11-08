@@ -2,14 +2,11 @@
 // 1. BACKEND API YAPILANDIRMASI
 // =============================================================================
 
-// Güvenli Node.js Express Backend URL'imiz (Tüm veritabanı iletişimi buradan yönetilir)
 const API_BASE_URL = "http://localhost:5000/api";
 
-// Üyelik ve Oturum Değişkenleri
 let isLoginMode = true; 
 let currentUser = null; 
 
-// HTML Elementleri
 const authArea = document.getElementById("auth-area");
 const authTitle = document.getElementById("auth-title");
 const authDesc = document.getElementById("auth-desc");
@@ -20,10 +17,9 @@ const authToggle = document.getElementById("auth-toggle");
 
 
 // =============================================================================
-// 2. KULLANICI GİRİŞ / KAYIT İŞLEMLERİ (BACKEND İLE)
+// 2. KULLANICI GİRİŞ / KAYIT / OTOMATİK OTURUM İŞLEMLERİ
 // =============================================================================
 
-// Giriş Yap / Kayıt Ol Ekran Geçişi
 authToggle.onclick = () => {
     isLoginMode = !isLoginMode;
     if (isLoginMode) {
@@ -39,7 +35,6 @@ authToggle.onclick = () => {
     }
 };
 
-// Form Gönderme (Backend üzerinden oturum açma / kaydetme)
 authSubmitBtn.onclick = async () => {
     const email = authEmail.value.trim();
     const password = authPassword.value;
@@ -69,49 +64,54 @@ authSubmitBtn.onclick = async () => {
             return;
         }
 
-        // Başarılı oturum
         currentUser = data.user || { email: email, uid: email.replace(/[^a-zA-Z0-9]/g, "_") };
+        localStorage.setItem("kelimeAppUser", JSON.stringify(currentUser));
+        
         alert(isLoginMode ? "Başarıyla giriş yapıldı! Keyifli öğrenmeler." : "Hesabınız başarıyla oluşturuldu! 🎉");
         
         authArea.style.display = "none";
         document.getElementById("category-selection").style.display = "block";
         
         await loadUserScore(currentUser);
+        await loadWords();
     } catch (error) {
         console.error("Giriş hatası:", error);
-        // Backend henüz login endpoint'ine sahip değilse geçici olarak yerel oturum açar
         currentUser = { email: email, uid: email.replace(/[^a-zA-Z0-9]/g, "_") };
+        localStorage.setItem("kelimeAppUser", JSON.stringify(currentUser));
+        
         authArea.style.display = "none";
         document.getElementById("category-selection").style.display = "block";
         await loadUserScore(currentUser);
+        await loadWords();
     }
+};
+
+window.logout = function() {
+    localStorage.removeItem("kelimeAppUser");
+    location.reload();
 };
 
 
 // =============================================================================
-// 3. VERİ YÖNETİMİ (BACKEND İLE SKOR YÜKLEME / KAYDETME)
+// 3. VERİ YÖNETİMİ (SKOR VE ÖZEL KELİME YÜKLEME / KAYDETME)
 // =============================================================================
 
-// Backend üzerinden kullanıcının skorunu çekme
 async function loadUserScore(user) {
     try {
         const res = await fetch(`${API_BASE_URL}/scores/${user.uid || user.email}`);
         if (res.ok) {
             const data = await res.json();
             learnedCount = data.learnedCount || 0;
-            console.log("Skor backend'den başarıyla yüklendi:", learnedCount);
         } else {
             learnedCount = 0;
         }
         updateStats(); 
     } catch (e) {
-        console.log("Skor backend'den çekilemedi, yerel sayaç başlatıldı:", e);
         learnedCount = 0;
         updateStats();
     }
 }
 
-// Backend üzerinden skoru Firestore'a güvenle kaydetme
 async function saveUserScoreToCloud() {
     if (!currentUser) return;
     try {
@@ -124,11 +124,58 @@ async function saveUserScoreToCloud() {
                 score: learnedCount
             })
         });
-        console.log("Yeni skor backend üzerinden güvenle kaydedildi:", learnedCount);
     } catch (e) {
         console.error("Skor kaydedilirken hata oluştu:", e);
     }
 }
+
+window.openAddWordModal = function() {
+    document.getElementById("add-word-modal").style.display = "flex";
+};
+
+window.closeAddWordModal = function() {
+    document.getElementById("add-word-modal").style.display = "none";
+};
+
+window.saveCustomWord = async function() {
+    const category = document.getElementById("custom-cat").value.trim();
+    const level = document.getElementById("custom-lvl").value.trim() || "Genel";
+    const en = document.getElementById("custom-en").value.trim();
+    const tr = document.getElementById("custom-tr").value.trim();
+
+    if (!category || !en || !tr) {
+        alert("Lütfen Kategori, İngilizce ve Türkçe alanlarını doldurun!");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/words/add`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                category: category,
+                level: level,
+                en: en,
+                tr: tr,
+                userEmail: currentUser ? currentUser.email : null
+            })
+        });
+
+        if (response.ok) {
+            alert("Kelime başarıyla eklendi! 🎉");
+            closeAddWordModal();
+            document.getElementById("custom-en").value = "";
+            document.getElementById("custom-tr").value = "";
+            await loadWords();
+        } else {
+            const err = await response.json();
+            alert(err.error || "Kelime eklenirken hata oluştu.");
+        }
+    } catch (e) {
+        console.error("Özel kelime kaydı başarısız:", e);
+        alert("Sunucuya bağlanılamadı. Backend'in çalıştığından emin olun.");
+    }
+};
 
 
 // =============================================================================
@@ -138,13 +185,11 @@ async function saveUserScoreToCloud() {
 let allData = {};
 let currentCategory = "";
 let currentLevelName = "";
+let currentPart = 1; // 1 = 1. Kısım (İlk 5 kelime), 2 = 2. Kısım (Son 5 kelime)
 let pool = [];
 let currentWord = null;
 let learnedCount = 0; 
 let lastWordsHistory = [];
-
-let askedLevelPassChoice = false;
-let mustLearnAllWords = false;
 
 let levelProgress = {};
 let reviewMode = false;
@@ -164,22 +209,12 @@ const userInput = document.getElementById("user-input");
 
 const catImages = {
     correct: [
-        "images/dogru1.jpg",
-        "images/dogru2.jpg",
-        "images/dogru3.jpg",
-        "images/dogru4.jpg",
-        "images/dogru5.jpg",
-        "images/dogru6.jpg",
-        "images/dogru7.jpg"
+        "images/dogru1.jpg", "images/dogru2.jpg", "images/dogru3.jpg",
+        "images/dogru4.jpg", "images/dogru5.jpg", "images/dogru6.jpg", "images/dogru7.jpg"
     ],
     wrong: [
-        "images/yanlis1.jpg",
-        "images/yanlis2.jpg",
-        "images/yanlis3.jpg",
-        "images/yanlis4.jpg",
-        "images/yanlis5.jpg",
-        "images/yanlis6.jpg",
-        "images/yanlis7.jpg"
+        "images/yanlis1.jpg", "images/yanlis2.jpg", "images/yanlis3.jpg",
+        "images/yanlis4.jpg", "images/yanlis5.jpg", "images/yanlis6.jpg", "images/yanlis7.jpg"
     ]
 };
 
@@ -254,7 +289,7 @@ window.speak = function(text, isSlow = false) {
     utterance.lang = "en-US";
 
     window.speechSynthesis.speak(utterance);
-}
+};
 
 window.speechSynthesis.onvoiceschanged = () => {
     window.speechSynthesis.getVoices();
@@ -262,76 +297,71 @@ window.speechSynthesis.onvoiceschanged = () => {
 
 
 // =============================================================================
-// 7. POP-UP / MODAL YÖNETİMİ
-// =============================================================================
-
-function createChoiceModal() {
-    if (document.getElementById("level-choice-modal")) return;
-
-    const modal = document.createElement("div");
-    modal.id = "level-choice-modal";
-    modal.style.display = "none";
-    modal.style.position = "fixed";
-    modal.style.inset = "0";
-    modal.style.background = "rgba(0, 0, 0, 0.45)";
-    modal.style.justifyContent = "center";
-    modal.style.alignItems = "center";
-    modal.style.zIndex = "9999";
-
-    modal.innerHTML = `
-        <div style="background: white; padding: 30px; border-radius: 14px; width: 90%; max-width: 420px; box-shadow: 0 6px 20px rgba(0,0,0,0.2); text-align: center;">
-            <h3 style="margin-top: 0;">Seviye Tamamlama</h3>
-            <p style="line-height: 1.5;">
-                Seviyeyi geçmek için yeterli kelime bildiniz.<br>
-                Ne yapmak istersiniz?
-            </p>
-            <button id="modal-next-level-btn" class="cat-btn" style="display:block; width:100%; margin:10px 0;">Yeni seviyeye geç</button>
-            <button id="modal-learn-all-btn" class="cat-btn" style="display:block; width:100%; margin:10px 0;">Tüm kelimeleri öğren</button>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-
-    document.getElementById("modal-next-level-btn").onclick = () => {
-        hideChoiceModal();
-        finishLevel();
-    };
-
-    document.getElementById("modal-learn-all-btn").onclick = () => {
-        mustLearnAllWords = true;
-        hideChoiceModal();
-        askQuestion();
-    };
-}
-
-function showChoiceModal() {
-    const modal = document.getElementById("level-choice-modal");
-    if (modal) modal.style.display = "flex";
-}
-
-function hideChoiceModal() {
-    const modal = document.getElementById("level-choice-modal");
-    if (modal) modal.style.display = "none";
-}
-
-
-// =============================================================================
-// 8. VERİ YÜKLEME VE İLERLEME TAKİBİ
+// 7. VERİ YÜKLEME VE İLERLEME TAKİBİ
 // =============================================================================
 
 async function loadWords() {
-    try {
-        const res = await fetch("words.json");
-        allData = await res.json();
-        initLevelProgress();
-        createChoiceModal();
-        renderCategories();
-    } catch (e) {
-        console.error("Veri yüklenemedi!", e);
-        alert("words.json yüklenemedi.");
-    }
-}
+    const container = document.getElementById("category-buttons");
+    container.textContent = "Kategoriler yükleniyor...";
+    const userEmail = currentUser ? currentUser.email : "guest";
+    const sources = [
+        `${API_BASE_URL}/words/${encodeURIComponent(userEmail)}`,
+        `${API_BASE_URL}/words`,
+        "./words.json"
+    ];
 
+    for (const source of sources) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 4000);
+        try {
+            const response = await fetch(source, { signal: controller.signal });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            if (!data || typeof data !== "object" || Array.isArray(data) ||
+                Object.keys(data).length === 0) {
+                throw new Error("Kategori verisi boş veya geçersiz.");
+            }
+            for (const levels of Object.values(data)) {
+                if (!levels || typeof levels !== "object" || Array.isArray(levels) ||
+                    !Object.values(levels).every(words => Array.isArray(words) &&
+                        words.every(word => word && typeof word.en === "string" &&
+                            typeof word.tr === "string"))) {
+                    throw new Error("Kelime verisinin biçimi geçersiz.");
+                }
+            }
+            const merged = {};
+            for (const [category, levels] of Object.entries(data)) {
+                merged[category] = {};
+                for (const [level, words] of Object.entries(levels)) {
+                    const name = level.replace(/^([abc][12])-\d+$/i, "$1").toLowerCase();
+                    merged[category][name] ||= [];
+                    for (const word of words) {
+                        if (!merged[category][name].some(item => item.en === word.en && item.tr === word.tr)) {
+                            merged[category][name].push(word);
+                        }
+                    }
+                }
+            }
+            allData = merged;
+            initLevelProgress();
+            renderCategories();
+            return;
+        } catch (error) {
+            console.warn(`Kelime kaynağı yüklenemedi: ${source}`, error);
+        } finally {
+            clearTimeout(timeout);
+        }
+    }
+
+    container.textContent = location.protocol === "file:"
+        ? "Kelimeler yüklenemedi. index.html dosyasını Live Server ile açın ve words.json dosyasını aynı klasörde tutun."
+        : "Kelimeler yüklenemedi. words.json dosyasının aynı klasörde olduğunu ve geçerli JSON içerdiğini kontrol edin.";
+    const retry = document.createElement("button");
+    retry.className = "cat-btn";
+    retry.textContent = "Tekrar dene";
+    retry.onclick = () => loadWords();
+    container.appendChild(retry);
+}
 function initLevelProgress() {
     levelProgress = {};
 
@@ -360,8 +390,8 @@ function getOrderedLevelsForCurrentCategory() {
     const levels = Object.keys(allData[currentCategory] || {});
 
     return levels.sort((a, b) => {
-        const ai = orderedLevels.indexOf(a);
-        const bi = orderedLevels.indexOf(b);
+        const ai = orderedLevels.indexOf(a.toLowerCase());
+        const bi = orderedLevels.indexOf(b.toLowerCase());
 
         if (ai === -1 && bi === -1) return a.localeCompare(b);
         if (ai === -1) return 1;
@@ -372,11 +402,16 @@ function getOrderedLevelsForCurrentCategory() {
 
 
 // =============================================================================
-// 9. KELİME İNCELEME (STUDY) MODU
+// 8. KELİME İNCELEME (STUDY) VE TEST BAŞLATMA
 // =============================================================================
 
-function startWithLevel(lvl) {
+function getPartWords(level) {
+    return allData[currentCategory]?.[level] || [];
+}
+
+function startWithLevel(lvl, part = 1) {
     currentLevelName = lvl;
+    currentPart = part;
     isStudyActive = false;
     
     document.getElementById("level-selection").style.display = "none";
@@ -402,26 +437,26 @@ function startWithLevel(lvl) {
 }
 
 window.startStudyMode = function() {
-    const allWordsInCat = allData[currentCategory]?.[currentLevelName];
-    if (!allWordsInCat || allWordsInCat.length === 0) {
+    const targetWords = getPartWords(currentLevelName, currentPart);
+    if (!targetWords || targetWords.length === 0) {
         alert("Bu seviyede kelime bulunamadı!");
         return;
     }
     
     isStudyActive = true;
-    studyWords = [...allWordsInCat].sort(() => Math.random() - 0.5).slice(0, 10);
+    studyWords = [...targetWords];
     currentStudyIndex = 0;
     renderStudyCard();
-}
+};
 
 window.nextStudyWord = function() {
     currentStudyIndex++;
     renderStudyCard();
-}
+};
 
 function renderStudyCard() {
     if (currentStudyIndex >= studyWords.length) {
-        alert("Harika! Tüm kelimeleri incelediniz, şimdi test zamanı!");
+        alert("Harika! Bu seviyedeki kelimeleri incelediniz, şimdi test zamanı!");
         initActualGame();
         return;
     }
@@ -451,14 +486,12 @@ function renderStudyCard() {
 
 
 // =============================================================================
-// 10. ANA OYUN DÖNGÜSÜ VE SORULAR
+// 9. ANA OYUN DÖNGÜSÜ VE 4 AŞAMALI SORULAR
 // =============================================================================
 
 window.initActualGame = function() {
     isStudyActive = false;
     lastWordsHistory = [];
-    askedLevelPassChoice = false;
-    mustLearnAllWords = false;
     reviewMode = false;
     reviewLevels = [];
     reviewTargetLevel = "";
@@ -466,22 +499,21 @@ window.initActualGame = function() {
     forcedWord = null;
     currentWord = null;
 
-    const allWordsInCat = allData[currentCategory]?.[currentLevelName];
+    const targetWords = getPartWords(currentLevelName, currentPart);
 
-    if (!allWordsInCat || allWordsInCat.length < 5) {
-        alert("Bu seviyede (" + currentLevelName.toUpperCase() + ") yeterli kelime bulunamadı!");
+    if (!targetWords || targetWords.length === 0) {
+        alert("Bu seviyede kelime bulunamadı!");
         location.reload();
         return;
     }
 
-    pool = [...allWordsInCat]
+    pool = [...targetWords]
         .sort(() => Math.random() - 0.5)
-        .slice(0, 10)
-        .map(w => ({ ...w, step: 1, wrongCount: 0 }));
+        .map(w => ({ ...w, step: 2, wrongCount: 0 }));
 
     updateStats();
     askQuestion();
-}
+};
 
 function updateStats() {
     document.getElementById("stat-cat").innerText = currentCategory ? currentCategory.toUpperCase() : "-";
@@ -490,7 +522,7 @@ function updateStats() {
         document.getElementById("stat-lvl").innerText = reviewLevels.map(l => l.toUpperCase()).join("+") + " TEST";
         document.getElementById("stat-count").innerText = reviewAnsweredCount;
     } else {
-        document.getElementById("stat-lvl").innerText = currentLevelName ? currentLevelName.toUpperCase() : "-";
+        document.getElementById("stat-lvl").innerText = currentLevelName.toUpperCase();
         document.getElementById("stat-count").innerText = learnedCount;
     }
 }
@@ -523,13 +555,7 @@ function askQuestion() {
         }
     } else {
         if (pool.length === 0) {
-            finishLevel();
-            return;
-        }
-
-        if (learnedCount >= 8 && !askedLevelPassChoice && !mustLearnAllWords) {
-            askedLevelPassChoice = true;
-            showChoiceModal();
+            finishCurrentPart();
             return;
         }
     }
@@ -557,17 +583,17 @@ function askQuestion() {
 
     const stepTexts = [
         "",
-        "TR -> EN (Seçim)",
-        "EN -> TR (Seçim)",
-        "TR -> EN (Yazım)",
-        "Dinle ve Yaz"
+        "1. Aşama: TR ➔ EN (Seçim)",
+        "1. Aşama: EN ➔ TR (Seçim)",
+        "2. Aşama: TR ➔ EN (Yazım)",
+        "3. Aşama: Dinle ve Yaz"
     ];
 
     const mode = getCurrentQuestionMode();
 
     document.getElementById("level-step-info").innerText = reviewMode
         ? "Tekrar Testi: " + stepTexts[mode]
-        : "Aşama: " + stepTexts[mode];
+        : stepTexts[mode];
 
     document.getElementById("result-text").innerText = "";
     document.getElementById("result-text").className = "";
@@ -600,14 +626,14 @@ function askQuestion() {
 
             speak(currentWord.en);
         } else {
-            document.getElementById("question").innerText = mode === 3 ? currentWord.tr : currentWord.en;
+            document.getElementById("question").innerText = currentWord.tr;
         }
     }
 }
 
 
 // =============================================================================
-// 11. ŞIKLAR VE CEVAP KONTROLÜ
+// 10. ŞIKLAR VE CEVAP KONTROLÜ
 // =============================================================================
 
 function showMultipleChoice() {
@@ -616,20 +642,29 @@ function showMultipleChoice() {
 
     const mode = getCurrentQuestionMode();
     const isStep1 = mode === 1;
+    
     document.getElementById("question").innerText = isStep1 ? currentWord.tr : currentWord.en;
-
     const correct = isStep1 ? currentWord.en : currentWord.tr;
+
+    const optionsSet = new Set([correct]);
     const sourceWords = getQuestionSourceWords();
 
-    const options = [correct];
-
-    while (options.length < 4 && sourceWords.length > 0) {
-        const randomWord = sourceWords[Math.floor(Math.random() * sourceWords.length)];
-        const randomValue = randomWord[isStep1 ? "en" : "tr"];
-        if (!options.includes(randomValue)) options.push(randomValue);
+    for (let w of [...sourceWords].sort(() => 0.5 - Math.random())) {
+        const val = isStep1 ? w.en : w.tr;
+        if (val) optionsSet.add(val);
+        if (optionsSet.size === 4) break;
     }
 
-    options.sort(() => Math.random() - 0.5);
+    if (optionsSet.size < 4) {
+        const allWordsList = Object.values(allData).flatMap(cat => Object.values(cat)).flat();
+        for (let w of [...allWordsList].sort(() => 0.5 - Math.random())) {
+            const val = isStep1 ? w.en : w.tr;
+            if (val) optionsSet.add(val);
+            if (optionsSet.size === 4) break;
+        }
+    }
+
+    const options = Array.from(optionsSet).sort(() => Math.random() - 0.5);
 
     const div = document.getElementById("answers");
     div.innerHTML = "";
@@ -648,7 +683,7 @@ function showInputArea() {
 
     const mode = getCurrentQuestionMode();
     if (mode !== 4) {
-        document.getElementById("question").innerText = mode === 3 ? currentWord.tr : currentWord.en;
+        document.getElementById("question").innerText = currentWord.tr;
     }
 
     setTimeout(() => userInput.focus(), 10);
@@ -661,11 +696,11 @@ window.checkInputAnswer = function() {
     const correctAnswer = normalizeText(correct);
 
     checkResult(userAnswer === correctAnswer, correct);
-}
+};
 
 
 // =============================================================================
-// 12. İLERLEME VE SEVİYE TAKİBİ
+// 11. İLERLEME VE SEVİYE TAKİBİ
 // =============================================================================
 
 function markWordAsLearned(category, level, word) {
@@ -695,14 +730,18 @@ function getFirstFailedLevel(levels) {
 }
 
 function endReviewAndReturnToLevel(level) {
-    reviewMode = false; reviewLevels = []; reviewTargetLevel = ""; reviewAnsweredCount = 0; forcedWord = null;
-    alert(level.toUpperCase() + " seviyesindeki öğrenilen kelime sayısı 8'in altına düştü. Bu seviyeye geri dönüyorsunuz.");
-    startWithLevel(level);
+    reviewMode = false; 
+    reviewLevels = []; 
+    reviewTargetLevel = ""; 
+    reviewAnsweredCount = 0; 
+    forcedWord = null;
+    alert(level.toUpperCase() + " seviyesindeki öğrenilen kelime sayısı yetersiz kaldı. Bu seviyeye geri dönüyorsunuz.");
+    startWithLevel(level, 1);
 }
 
 
 // =============================================================================
-// 13. SONUÇ DEĞERLENDİRME (CHECK RESULT)
+// 12. SONUÇ DEĞERLENDİRME (CHECK RESULT)
 // =============================================================================
 
 function checkResult(isCorrect, correctVal) {
@@ -712,7 +751,7 @@ function checkResult(isCorrect, correctVal) {
 
     if (isCorrect) {
         showCatReaction("correct"); 
-        resDiv.innerText = "Doğru!"; 
+        resDiv.innerText = "Doğru! 🎉"; 
         resDiv.className = "correct"; 
         currentWord.wrongCount = 0; 
         forcedWord = null;
@@ -728,7 +767,7 @@ function checkResult(isCorrect, correctVal) {
                 pool = pool.filter(w => w !== currentWord); 
                 learnedCount++; 
                 updateStats(); 
-                saveUserScoreToCloud(); // Backend'e kaydet
+                saveUserScoreToCloud();
             } 
         }
     } else {
@@ -756,10 +795,10 @@ function checkResult(isCorrect, correctVal) {
                     return; 
                 }
             } else { 
-                currentWord.step = 1; 
+                currentWord.step = 2; 
                 currentWord.wrongCount = 0; 
                 forcedWord = null; 
-                resDiv.innerText = "Yanlış! 2 hata yaptınız. Kelime başa döndü. Doğru cevap: " + correctVal; 
+                resDiv.innerText = "Yanlış! 2 hata yaptınız. Kelime ilk aşamaya döndü. Doğru cevap: " + correctVal; 
             }
         } else { 
             forcedWord = currentWord; 
@@ -777,34 +816,45 @@ function checkResult(isCorrect, correctVal) {
 
 
 // =============================================================================
-// 14. SEVİYE ATLAMALARI VE REVIEWS
+// 13. SEVİYE VE KISIM GEÇİŞLERİ (1. KISIM -> 2. KISIM -> YENİ SEVİYE)
 // =============================================================================
+
+function finishCurrentPart() {
+    alert(`Tebrikler! ${currentLevelName.toUpperCase()} seviyesini tamamladınız!`);
+    advanceToNextStage();
+}
 
 function startReviewTest(levels, nextLevel) {
     const failedLevel = getFirstFailedLevel(levels); 
     if (failedLevel) { 
-        alert(failedLevel.toUpperCase() + " seviyesinde öğrenilen kelime sayısı zaten 8'in altında. Önce bu seviyeyi tekrar tamamlamalısınız."); 
-        startWithLevel(failedLevel); 
+        alert(failedLevel.toUpperCase() + " seviyesinde öğrenilen kelime sayısı yetersiz. Önce bu seviyeyi tamamlamalısınız."); 
+        startWithLevel(failedLevel, 1); 
         return; 
     }
 
-    reviewMode = true; reviewLevels = levels; reviewTargetLevel = nextLevel; reviewAnsweredCount = 0; forcedWord = null; currentWord = null; lastWordsHistory = []; 
+    reviewMode = true; 
+    reviewLevels = levels; 
+    reviewTargetLevel = nextLevel; 
+    reviewAnsweredCount = 0; 
+    forcedWord = null; 
+    currentWord = null; 
+    lastWordsHistory = []; 
     let candidates = [];
 
     levels.forEach(level => { 
         const learnedWords = (levelProgress[currentCategory][level] || [])
             .filter(w => w.learned)
-            .map(w => ({ ...w, sourceLevel: level, questionMode: Math.floor(Math.random() * 4) + 1, wrongCount: 0 })); 
+            .map(w => ({ ...w, sourceLevel: level, questionMode: [2, 3, 4][Math.floor(Math.random() * 3)], wrongCount: 0 })); 
         candidates = candidates.concat(learnedWords); 
     });
 
     if (candidates.length === 0) { 
         alert("Tekrar testi için yeterli kelime bulunamadı."); 
-        startWithLevel(levels[0]); 
+        startWithLevel(levels[0], 1); 
         return; 
     }
 
-    pool = candidates.sort(() => Math.random() - 0.5).slice(0, Math.min(10, candidates.length));
+    pool = candidates.sort(() => Math.random() - 0.5).slice(0, Math.min(8, candidates.length));
     document.getElementById("game-area").style.display = "block"; 
     updateStats(); 
     alert(levels.map(l => l.toUpperCase()).join(" + ") + " için tekrar testi başlıyor."); 
@@ -812,63 +862,64 @@ function startReviewTest(levels, nextLevel) {
 }
 
 function finishReviewTest() {
-    const failedLevel = getFirstFailedLevel(reviewLevels); reviewMode = false; forcedWord = null;
+    const failedLevel = getFirstFailedLevel(reviewLevels); 
+    reviewMode = false; 
+    forcedWord = null;
+    
     if (failedLevel) { 
-        alert(failedLevel.toUpperCase() + " seviyesindeki öğrenilen kelime sayısı 8'in altına düştü. Bu seviyeye geri dönüyorsunuz."); 
-        startWithLevel(failedLevel); 
+        alert(failedLevel.toUpperCase() + " seviyesindeki öğrenilen kelime sayısı düştü. Bu seviyeye geri dönüyorsunuz."); 
+        startWithLevel(failedLevel, 1); 
         return; 
     }
     alert("Tekrar testini geçtiniz. Şimdi " + reviewTargetLevel.toUpperCase() + " seviyesine geçiliyor."); 
-    startWithLevel(reviewTargetLevel);
+    startWithLevel(reviewTargetLevel, 1);
 }
 
 function advanceToNextStage() {
     const levels = getOrderedLevelsForCurrentCategory(); 
     const currentIndex = levels.indexOf(currentLevelName);
 
-    if (currentIndex === -1) { alert("Geçersiz seviye bulundu."); location.reload(); return; }
+    if (currentIndex === -1) { 
+        alert("Geçersiz seviye bulundu."); 
+        location.reload(); 
+        return; 
+    }
     const nextLevel = levels[currentIndex + 1];
 
     if (!nextLevel) { 
-        alert("Harika! Bu ilgi alanındaki tüm seviyeleri bitirdiniz. Başka bir kategori seçebilirsiniz."); 
+        alert("Harika! Bu kategorideki tüm seviyeleri bitirdiniz. Başka bir kategori seçebilirsiniz."); 
         location.reload(); 
         return; 
     }
 
-    if (currentLevelName === "a2" && nextLevel === "b1") { 
+    if (currentLevelName.toLowerCase() === "a2" && nextLevel.toLowerCase() === "b1") { 
         startReviewTest(["a1", "a2"].filter(level => levels.includes(level)), "b1"); 
         return; 
     }
-    if (currentLevelName === "b2" && nextLevel === "c1") { 
+    if (currentLevelName.toLowerCase() === "b2" && nextLevel.toLowerCase() === "c1") { 
         startReviewTest(["b1", "b2"].filter(level => levels.includes(level)), "c1"); 
         return; 
     }
 
-    alert("Tebrikler! " + currentLevelName.toUpperCase() + " seviyesini tamamladınız. Şimdi " + nextLevel.toUpperCase() + " seviyesine geçiliyor!"); 
-    startWithLevel(nextLevel);
-}
-
-function finishLevel() { 
-    if (learnedCount < 8) { 
-        alert("Maalesef " + learnedCount + " kelime bildiniz. Seviyeyi geçmek için en az 8 kelimeyi tamamen bitirmelisiniz. Tekrar deneniyor..."); 
-        startWithLevel(currentLevelName); 
-        return; 
-    } 
-    advanceToNextStage(); 
+    alert("Şimdi yeni seviyeye geçiliyor: " + nextLevel.toUpperCase()); 
+    startWithLevel(nextLevel, 1);
 }
 
 
 // =============================================================================
-// 15. DİNAMİK RENDER VE MENÜ YÖNETİMİ
+// 14. DİNAMİK RENDER VE MENÜ YÖNETİMİ
 // =============================================================================
 
 function renderCategories() { 
     const categoryContainer = document.getElementById("category-buttons"); 
     categoryContainer.innerHTML = ""; 
+
     const categories = Object.keys(allData); 
     
     if (categories.length === 0) { 
-        categoryContainer.innerHTML = "<p>Hiç kategori bulunamadı.</p>"; 
+        const p = document.createElement("p");
+        p.innerText = "Henüz kategori bulunamadı. Yukarıdaki butondan ekleyebilirsiniz!";
+        categoryContainer.appendChild(p);
         return; 
     } 
     
@@ -895,12 +946,14 @@ function renderLevels() {
         const btn = document.createElement("button"); 
         btn.className = "cat-btn"; 
         btn.innerText = level.toUpperCase(); 
-        btn.onclick = () => startWithLevel(level); 
+        btn.onclick = () => startWithLevel(level, 1); 
         levelContainer.appendChild(btn); 
     }); 
 }
 
-function formatCategoryName(category) { return category.charAt(0).toUpperCase() + category.slice(1); }
+function formatCategoryName(category) { 
+    return category.charAt(0).toUpperCase() + category.slice(1); 
+}
 
 window.goBack = function() {
     window.speechSynthesis.cancel(); 
@@ -920,13 +973,32 @@ window.goBack = function() {
             document.getElementById("level-selection").style.display = "block"; 
             isStudyActive = false; 
         } else { 
-            startWithLevel(currentLevelName); 
+            startWithLevel(currentLevelName, currentPart); 
         } 
     }
-}
+};
 
 nextButton.onclick = () => askQuestion();
 userInput.addEventListener("keypress", e => { if (e.key === "Enter") checkInputAnswer(); });
 
-// Başlatıcı
-loadWords();
+
+// =============================================================================
+// 15. BAŞLATICI VE OTOMATİK OTURUM KONTROLÜ
+// =============================================================================
+
+async function checkSavedSession() {
+    const savedUser = localStorage.getItem("kelimeAppUser");
+    if (savedUser) {
+        try {
+            currentUser = JSON.parse(savedUser);
+            document.getElementById("auth-area").style.display = "none";
+            document.getElementById("category-selection").style.display = "block";
+            await loadUserScore(currentUser);
+        } catch (e) {
+            console.error("Oturum çözümlenemedi:", e);
+        }
+    }
+    await loadWords();
+}
+
+checkSavedSession();
